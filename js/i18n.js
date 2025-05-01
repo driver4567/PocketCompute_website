@@ -139,7 +139,7 @@ const translations = {
       },
       os: {
         question: "What operating system does PocketCompute run?",
-        answer: "PocketCompute runs on Android 13 and will be Google Mobile Services certified."
+        answer: "PocketCompute runs on Android 14 and will be Google Mobile Services certified."
       },
       expansion: {
         question: "How does the microcontroller expansion work?",

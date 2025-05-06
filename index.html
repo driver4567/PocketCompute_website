@@ -5,10 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PocketCompute - The Next Generation Smart Device</title>
 
+  <!-- Preload Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link class="preload_font" href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,700&text=PckCompute&display=swap" rel="stylesheet">
+
   <!-- Inline SVG Logo -->
   <script>
     const logoSVG = `
-      <svg viewBox="0 0 119 23" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+      <svg viewBox="0 0 119 23" xmlns="http://www.w3.org/2000/svg">
 
           <defs>
              <bx:grid x="0" y="0" width="115.817" height="23.288"></bx:grid>
@@ -28,6 +33,14 @@
                  font-family: 'Signika';
                  font-weight: 600;
                }
+                
+                .logo_text{
+                  visibility: hidden;
+                }
+                .logo_text.font-loaded {
+                  visibility: visible;
+                }
+
              </style>
          
           </defs>
@@ -39,7 +52,7 @@
          
          </g>
          
-         <text font-size="16" font-family="'Asap', sans-serif" x="10" y="19" style="white-space: pre;" transform="matrix(0.85, 0, 0, 0.85, 11, 0)"><tspan fill="#000000" x="8">Pocket</tspan><tspan fill="#000000" x="56">Compute​</tspan></text>
+         <text class="logo_text" font-size="16" font-family="'Asap', sans-serif" x="10" y="19" style="white-space: pre;" transform="matrix(0.85, 0, 0, 0.85, 11, 0)"><tspan fill="#000000" x="8">Pocket</tspan><tspan fill="#000000" x="56">Compute​</tspan></text>
          
          </svg>
     `;
@@ -47,6 +60,142 @@
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("svg-logo-1").innerHTML = logoSVG;
       document.getElementById("svg-logo-2").innerHTML = logoSVG;
+    });
+
+    
+    // This script will check if the Asap font is loaded
+    // Look for the preloaded font in the parent document
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.document && window.document.fonts) {
+        window.document.fonts.ready.then(function() {
+          // Check if Asap font is available
+          if (window.document.fonts.check('italic 700 16px Asap')) {
+            // Make text visible
+            document.querySelectorAll('.logo_text').forEach(function(el) {
+              el.classList.add('font-loaded');
+            });
+          } else {
+            // Set a fallback timer in case font detection fails
+            setTimeout(function() {
+              document.querySelectorAll('.logo_text').forEach(function(el) {
+                el.classList.add('font-loaded');
+              });
+            }, 1000);
+          }
+        });
+      } else {
+        // Fallback for browsers that don't support Font Loading API
+        setTimeout(function() {
+          document.querySelectorAll('.logo_text').forEach(function(el) {
+            el.classList.add('font-loaded');
+          });
+        }, 1000);
+      }
+    });
+    
+
+  </script>
+
+  <!-- Flag images - Checks if unicode flag's can render in the browser for the Language selector, if they can't dynamicly loads CSS and displays flag svg's -->
+  <script>
+    // Check if the flag unicode renders correctly in the clients browser, if not replace with SVG image from flag-icons.min.css
+    document.addEventListener("DOMContentLoaded", () => {
+
+        // Map of language codes to flag emojis and image paths
+        const flagMap = {
+            gb: { emoji: "🇬🇧", image: "flag fi fi-gb", alt: "UK Flag" },
+            de: { emoji: "🇩🇪", image: "flag fi fi-de", alt: "German Flag" },
+            fr: { emoji: "🇫🇷", image: "flag fi fi-fr", alt: "French Flag" },
+            ja: { emoji: "🇯🇵", image: "flag fi fi-jp", alt: "Japanese Flag" },
+            es: { emoji: "🇪🇸", image: "flag fi fi-es", alt: "Spanish Flag" },
+        };
+    
+        // Function to detect if flag emoji renders correctly
+        function canRenderFlagEmoji(emoji) {
+            try {
+                const canvas = document.createElement("canvas");
+                canvas.width = 50;
+                canvas.height = 50;
+                const ctx = canvas.getContext("2d");
+                ctx.font = "24px Arial"; // Use a fallback font to avoid emoji-specific fonts
+                ctx.fillText(emoji, 5, 30);
+        
+                // Get pixel data
+                const pixelData = ctx.getImageData(5, 5, 40, 40).data;
+        
+                // Check if the emoji rendered as a flag (non-transparent pixels)
+                let nonTransparentPixels = 0;
+                for (let i = 3; i < pixelData.length; i += 4) {
+                    if (pixelData[i] > 0) nonTransparentPixels++;
+                }
+
+                //for English flag
+                // On chrome not rendering the flag unicode, I get 203, on firefox while rendering I get 428
+                //window.alert(nonTransparentPixels); 
+                console.log(nonTransparentPixels);
+
+        
+                // If the emoji renders as a flag, it should have significant non-transparent pixels
+                return nonTransparentPixels > 315;  // Adjust threshold as needed (approx half way between 203 & 428)
+            } catch (e) {
+                console.error("Canvas error:", e);
+                return false; // Fallback to images if canvas fails
+            }
+        }
+        
+
+        // Function to dynamically load the Flag Icons stylesheet
+        /* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css"> */
+        function loadFlagIconsStylesheet() {
+            return new Promise((resolve, reject) => {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css";
+            link.onload = resolve;
+            link.onerror = reject;
+            document.head.appendChild(link);
+            });
+        }
+
+
+        // Check if flag support is already cached in session var
+        let canRenderFlags = localStorage.getItem("canRenderFlags");
+
+        if (canRenderFlags === null) {
+            // Test only one flag emoji (🇬🇧 for English)
+            canRenderFlags = canRenderFlagEmoji(flagMap.en.emoji);
+            // Cache the result in localStorage
+            localStorage.setItem("canRenderFlags", canRenderFlags);
+        } else {
+            // Convert string to boolean
+            canRenderFlags = canRenderFlags === "true";
+        }
+    
+        // If flags can't be rendered, replace emojis with images
+        if (!canRenderFlags) {
+            //window.alert("Replace unicode flag with image, since not rendering");
+            console.log("Replace unicode flag with image, since not rendering");
+
+            loadFlagIconsStylesheet()
+                .then(() => {
+                document.querySelectorAll(".flag").forEach((flagElement) => {
+                    const flagCode = flagElement.dataset.flag;
+                    const flagInfo = flagMap[flagCode];
+                    if (flagInfo) {
+                        //flagElement.innerHTML = `<img src="${flagInfo.image}" alt="${flagInfo.alt}" class="flag-image">`;
+                        flagElement.innerHTML = `<span class="${flagInfo.image}"></span>`;
+                    }
+                });
+            })
+            .catch((error) => {
+                console.error("Failed to load Flag icons stylesheet:", error);
+                // Optional: Fallback to text or another method if stylesheet fails
+                /*document.querySelectorAll(".flag").forEach((flagElement) => {
+                    const flagCode = flagElement.dataset.flag;
+                    flagElement.innerHTML = `<span>${flagCode.toUpperCase()}</span>`;
+                });*/
+            });
+        }
     });
   </script>
 
@@ -134,7 +283,7 @@
         <div class="col lg-col-6">
           <div class="hero-content opacity-0">
             <h1 class="hero-title" data-translation="hero.title">introducing... <br><div style="font-family:Asap;">&nbsp PocketCompute</div></h1>
-            <p class="hero-subtitle" data-translation="hero.subtitle">the World's First <b>payment ready</b> <i>multi-functional mini-computer</i> for <b>Makers</b> and <b>Creators</b></p>
+            <p class="hero-subtitle" data-translation="hero.subtitle">the World's First <b>payment ready</b> <i>multi-functional <b>mini computer</b></i> for <b>Makers</b> and <b>Creators</b></p>
             <div class="hero-buttons">
               <a href="#kickstarter" class="btn btn-primary btn-lg btn-with-icon">
                 <span data-translation="hero.kickstarterButton">Support on Kickstarter</span>
@@ -263,7 +412,7 @@
           <ul class="function-features-list">
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fab fa-usb"></i></span>
-              <span data-translation="functions.general.features.usb">3 x USB 2.0 ports <br />+ 1 internal USB 2.0</span>
+              <span data-translation="functions.general.features.usb">3 x USB 2.0 ports <br />+ 1 x internal USB 2.0</span>
             </li>
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fas fa-tv"></i></span>
@@ -311,9 +460,15 @@
               <span class="function-feature-icon"><i class="fas fa-cash-register"></i></span>
               <span data-translation="functions.payment.features.pos">Perform POS functionality</span>
             </li>
+            <!--
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fab fa-nfc-directional"></i></span>
               <span data-translation="functions.payment.features.readWrite">Read and Write NFC tokens</span>
+            </li>
+            -->
+            <li class="function-feature">
+              <span class="function-feature-icon"><i class="fab fa-nfc-directional"></i></span>
+              <span data-translation="functions.payment.features.accessControl">RFID / NFC access control</span>
             </li>
           </ul>
         </div>
@@ -331,7 +486,7 @@
       <div class="function-item">
         <div class="function-content">
           <h3 class="function-title" data-translation="functions.expansion.title">Microcontroller Expansion</h3>
-          <p class="function-description" data-translation="functions.expansion.description">As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCB's or micro-controllers, including an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers, who wish to extend PocketCompute's functionality even further.</p>
+          <p class="function-description" data-translation="functions.expansion.description">As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCB's or micro-controllers, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers, who wish to extend PocketCompute's functionality even further.</p>
           <ul class="function-features-list">
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fas fa-plug"></i></span>
@@ -343,7 +498,7 @@
             </li>
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fas fa-code"></i></span>
-              <span data-translation="functions.expansion.features.sdk">Open-source 3D models of back and front removable Panels to allow for custom designs</span>
+              <span data-translation="functions.expansion.features.sdk">Open-source printable 3D models of back and front removable Panels to allow for custom designs &amp; configurations</span>
             </li>
           </ul>
         </div>
@@ -351,7 +506,7 @@
           <div class="function-image-container">
             <img src="images/Adding_Microcontrollers.jpg" alt="Microcontroller Expansion" class="function-image">
             <div class="function-image-overlay">
-              <p class="function-image-subtext" data-translation="functions.expansion.ImageSubText">Remove the backcover with two screws and extend PocketCompute’s functionality with additional Microcontrollers or Electionics. Pictured here a red Arduino Nano clone ready to be connected to PocketCompute's internal USB and a Raspberry Pi Pico to the side.</p>
+              <p class="function-image-subtext" data-translation="functions.expansion.ImageSubText">Remove the backcover with two screws and extend PocketCompute's functionality with additional Microcontrollers or Electionics. Pictured here a red Arduino Nano clone ready to be connected to PocketCompute's internal USB and a Raspberry Pi Pico to the side.</p>
             </div>
           </div>
         </div>
@@ -511,7 +666,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-1">
-              <p class="accordion-answer" data-translation="faq.availability.answer">PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q2 2025. The first devices are expected to ship to backers in Q4 2025 to Q1 2026, with general availability planned for Q2 2025.</p>
+              <p class="accordion-answer" data-translation="faq.availability.answer">PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q2 2025. The first devices are expected to ship to backers in Q4 2025 to Q1 2026, with general availability planned for Q1 2026.</p>
             </div>
           </div>
           
@@ -543,7 +698,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-3">
-              <p class="accordion-answer" data-translation="faq.payment.answer">PocketCompute's Tap and Pay feature uses Google's Android &quot; Tap to Pay&quot;, which means it is compatible with all major payment processors including Stripe, Square, Adyen, and many more. This allows you to bring your own SoftPOS system from the Google Play store, so you’re not locked in, in any way or more so we hope for you to use our own purpose built and developer friendly SoftPOS system for PocketCompute which we will announce in the near future.</p>
+              <p class="accordion-answer" data-translation="faq.payment.answer">PocketCompute's Tap and Pay feature uses Google's Android &quot;Tap to Pay&quot;, which means it is compatible with all major payment processors including Stripe, Square, Adyen, and many more. This allows you to bring your own SoftPOS system from the Google Play store, so you're not locked in, in any way or more so we hope for you to use our own purpose built and developer friendly SoftPOS system for PocketCompute which we will announce in the near future.</p>
             </div>
           </div>
 
@@ -585,7 +740,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-7">
-              <p class="accordion-answer" data-translation="faq.pantented.answer">Yes, PocketCompute’s design is patent pending.</p>
+              <p class="accordion-answer" data-translation="faq.pantented.answer">Yes, PocketCompute's design is patent pending.</p>
             </div>
           </div>
 
@@ -595,7 +750,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-8">
-              <p class="accordion-answer" data-translation="faq.community.answer">Yes, we will set up a community for makers, creators and everyone else to buy and sell community made attachments and creations for PocketCompute, allowing you to sell and share your creations with the world! - Please let us know if this is something you would like.</p>
+              <p class="accordion-answer" data-translation="faq.community.answer">Yes, we will set up a community for makers, creators and everyone else to buy and sell community made attachments and creations for PocketCompute, allowing you to make, sell and share your creations with the world! - Please let us know if this is something you would like.</p>
             </div>
           </div>
           
@@ -677,7 +832,7 @@
         <div class="col lg-col-4">
           <div class="footer-brand">
             <!--<div class="footer-logo">PocketCompute</div>-->
-            <div class="footer-logo"><div id="svg-logo-2"></div></div>
+            <div class="footer-logo"><div class="logo_text" id="svg-logo-2"></div></div>
             
             <p class="footer-tagline" data-translation="footer.tagline">Redefining what a smart device can be.</p>
           </div>
@@ -718,33 +873,32 @@
           </ul>
         </div>
         
-        <div class="col lg-col-4">
+        <div class="col lg-col-4 col_language">
           <h3 class="footer-heading" data-translation="footer.language.title">Language</h3>
           <p data-translation="footer.language.subtitle">Select your preferred language</p>
           
           <div class="language-selector mt-3">
             <button class="language-dropdown-toggle">
               <i class="fas fa-globe"></i>
-              <span class="current-language"><span class="flag">🇺🇸</span> English</span>
+                <span class="current-language"><span class="flag" data-flag="gb" data-lang="en">🇬🇧</span> English</span>
               <i class="fas fa-chevron-down"></i>
             </button>
             
             <div class="language-dropdown">
               <button class="language-option" data-lang="en">
-                <!-- 🇬🇧 -->
-                <span class="flag">🇺🇸</span> English
+                <span class="flag" data-flag="gb" data-lang="en">🇬🇧</span> English
               </button>
               <button class="language-option" data-lang="de">
-                <span class="flag">🇩🇪</span> Deutsch
+                <span class="flag" data-flag="de" data-lang="de">🇩🇪</span> Deutsch
               </button>
               <button class="language-option" data-lang="fr">
-                <span class="flag">🇫🇷</span> Français
+                <span class="flag" data-flag="fr" data-lang="fr">🇫🇷</span> Français
               </button>
               <button class="language-option" data-lang="ja">
-                <span class="flag">🇯🇵</span> 日本語
+                <span class="flag" data-flag="ja" data-lang="ja">🇯🇵</span> 日本語
               </button>
               <button class="language-option" data-lang="es">
-                <span class="flag">🇪🇸</span> Español
+                <span class="flag" data-flag="es" data-lang="es">🇪🇸</span> Español
               </button>
             </div>
           </div>

@@ -234,16 +234,25 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  /* this allows the menu to drop down */
+  min-width: 0; /* allows children to shrink */
 }
 
 .logo {
-  display: inline-block;
+  display: inline-block; 
+  flex-shrink: 1;
+  max-width: 80%; /* or less, if needed */
+  min-width: 0;  
+}
+
+#svg-logo-1 {
+  max-width: 100%;
+  height: auto;
 }
 
 .logo svg,
 .logo img {
-  width: auto;
+  max-width: 100%;
   height: 60px;
   display: block;
   object-fit: contain;
@@ -343,11 +352,20 @@ p {
 }
 
 .language-option:hover {
-  background-color: var(--neutral-50);
+  /*background-color: var(--neutral-50); */
+  background-color: var(--neutral-300);
+  border-radius: var(--rounded);
 }
 
 .language-option .flag {
-  font-size: 1.2rem;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  /* font-size: 1.2rem; */
+}
+
+.flag {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  display: inline-block; /* Ensure proper spacing */
+  margin-right: 0.5rem; /* Add spacing between flag and text */
 }
 
 .mobile-menu-toggle {
@@ -358,6 +376,8 @@ p {
   cursor: pointer;
   outline: none;
   transition: transform 0.3s ease; /* Add transition for smooth scaling */
+  /*flex-shrink: 0;
+  white-space: nowrap;*/
 }
 
 .mobile-menu-toggle:hover {
@@ -383,6 +403,8 @@ p {
 @media (max-width: 768px) {
   .mobile-menu-toggle {
     display: block; /* Show only on mobile */
+    /*flex-shrink: 0;
+    white-space: nowrap;*/
   }
   
   .nav {
@@ -447,7 +469,25 @@ p {
   letter-spacing: -0.02em;
   background: linear-gradient(90deg, var(--neutral-900) 0%, var(--primary) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Allow the PocketCompute text in the hero to fade in to apperance, more so after the font has loaded */
+.hero-title div {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--neutral-900);
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--neutral-900) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  opacity: 0;
+  animation: fadeIn 1.3s ease-in forwards;
 }
 
 .hero-subtitle {
@@ -989,6 +1029,7 @@ p {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -1861,6 +1902,7 @@ p {
     font-size: 2.5rem;
     background: linear-gradient(90deg, var(--neutral-800) 0%, var(--primary) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
   }
   
   .hero-subtitle {
@@ -1979,6 +2021,40 @@ p {
   .modal {
     padding: 1.5rem;
   }
+
+  /* Make the language selector drop up (not down, so it doesn't run off the screen), when the column it is in is wrapped to the next line */
+  .col_language .language-selector {
+    position: relative;
+    z-index: 1100; /* Or higher than neighboring elements */
+  }
+  .col_language .language-dropdown {
+    position: absolute; /* Ensure this is absolute */
+    bottom: 100%;
+    top: auto;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+    z-index: 1101; /* Must be higher than any overlapping content */
+    overflow: visible; /* Prevent any clipping */
+  }
+  .col_language .language-dropdown::before {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    top: auto;
+    border-top: 0.5rem solid var(--white);
+    border-bottom: none;
+    z-index: 1102; /* Must be higher than any overlapping content */
+  }
+  .col_language .language-selector.active .language-dropdown {
+    display: block;
+    left: 50%;
+    transform: translateX(-37%);
+  }
+  /* Ensure the footer and container don't clip the dropdown */
+  .footer,
+  .container {
+    overflow: visible; /* Prevent clipping of absolute-positioned children */
+  }
 }
 
 @media (max-width: 380px) {
@@ -2036,9 +2112,5 @@ p {
   .function-image-wrapper {
     width: 100%;
     order: 1;
-  }
-
-  .function-image-container {
-    /*height: 400px;*/
   }
 }

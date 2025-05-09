@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PocketCompute - The Next Generation Smart Device</title>
+  <title>PocketCompute - A multi-functional mini computer</title>
 
   <!-- Preload Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,12 +34,14 @@
                  font-weight: 600;
                }
                 
+               
                 .logo_text{
                   visibility: hidden;
                 }
                 .logo_text.font-loaded {
                   visibility: visible;
                 }
+                
 
              </style>
          
@@ -73,12 +75,14 @@
             // Make text visible
             document.querySelectorAll('.logo_text').forEach(function(el) {
               el.classList.add('font-loaded');
+              console.log('11 ');
             });
           } else {
             // Set a fallback timer in case font detection fails
             setTimeout(function() {
               document.querySelectorAll('.logo_text').forEach(function(el) {
                 el.classList.add('font-loaded');
+                console.log('22 ');
               });
             }, 1000);
           }
@@ -88,6 +92,7 @@
         setTimeout(function() {
           document.querySelectorAll('.logo_text').forEach(function(el) {
             el.classList.add('font-loaded');
+            console.log('33 ');
           });
         }, 1000);
       }
@@ -132,7 +137,7 @@
                 //for English flag
                 // On chrome not rendering the flag unicode, I get 203, on firefox while rendering I get 428
                 //window.alert(nonTransparentPixels); 
-                console.log(nonTransparentPixels);
+                //console.log(nonTransparentPixels);
 
         
                 // If the emoji renders as a flag, it should have significant non-transparent pixels
@@ -174,7 +179,7 @@
         // If flags can't be rendered, replace emojis with images
         if (!canRenderFlags) {
             //window.alert("Replace unicode flag with image, since not rendering");
-            console.log("Replace unicode flag with image, since not rendering");
+            //console.log("Replace unicode flag with image, since not rendering");
 
             loadFlagIconsStylesheet()
                 .then(() => {
@@ -283,7 +288,7 @@
         <div class="col lg-col-6">
           <div class="hero-content opacity-0">
             <h1 class="hero-title" data-translation="hero.title">introducing... <br><div style="font-family:Asap;">&nbsp PocketCompute</div></h1>
-            <p class="hero-subtitle" data-translation="hero.subtitle">the World's First <b>payment ready</b> <i>multi-functional <b>mini computer</b></i> for <b>Makers</b> and <b>Creators</b></p>
+            <p class="hero-subtitle" data-translation="hero.subtitle">the World's First <b>payment</b> ready <i><b>mini computer</b></i> for <b>Makers</b> and <b>Creators</b></p>
             <div class="hero-buttons">
               <a href="#kickstarter" class="btn btn-primary btn-lg btn-with-icon">
                 <span data-translation="hero.kickstarterButton">Support on Kickstarter</span>
@@ -485,11 +490,11 @@
       <!-- Microcontroller Expansion -->
       <div class="function-item">
         <div class="function-content">
-          <h3 class="function-title" data-translation="functions.expansion.title">Microcontroller Expansion</h3>
-          <p class="function-description" data-translation="functions.expansion.description">As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCB's or micro-controllers, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers, who wish to extend PocketCompute's functionality even further.</p>
+          <h3 class="function-title" data-translation="functions.expansion.title">Universal Handheld Control hub</h3>
+          <p class="function-description" data-translation="functions.expansion.description">As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCB's or micro-controllers, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers who wish to extend PocketCompute’s functionality to any number of applications with no bounds.</p>
           <ul class="function-features-list">
             <li class="function-feature">
-              <span class="function-feature-icon"><i class="fas fa-plug"></i></span>
+              <span class="function-feature-icon"><i class="fas fa-plus"></i></span>
               <span data-translation="functions.expansion.features.usb">Internal USB expansion port</span>
             </li>
             <li class="function-feature">
@@ -499,6 +504,10 @@
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fas fa-code"></i></span>
               <span data-translation="functions.expansion.features.sdk">Open-source printable 3D models of back and front removable Panels to allow for custom designs &amp; configurations</span>
+            </li>
+            <li class="function-feature">
+              <span class="function-feature-icon"><i class="fas fa-link"></i></span>
+              <span data-translation="functions.expansion.features.controlHub">Smart control hub</span>
             </li>
           </ul>
         </div>
@@ -620,7 +629,7 @@
     <div class="container">
       <div class="section-header opacity-0">
         <h2 class="section-title" data-translation="about.title">About PocketCompute</h2>
-        <p class="section-subtitle" data-translation="about.subtitle">Learn more about our mission to revolutionize personal technology.</p>
+        <p class="section-subtitle" data-translation="about.subtitle">Learn more about our mission to help advance handheld technology and smart control hubs.</p>
       </div>
       
       <div class="about-content">
@@ -633,17 +642,17 @@
           
           <div class="about-story">
             <h3 class="about-story-title" data-translation="about.story.title">Our Story</h3>
-            <p class="about-story-content" data-translation="about.story.content">PocketCompute was born from a simple question: Why can't our smartphones do more? Our team of engineers and designers set out to create a device that breaks the limitations of conventional smartphones, offering unprecedented customization and expandability.</p>
+            <p class="about-story-content" data-translation="about.story.content">PocketCompute was born from a simple question: Why can't our smartphones do more? Our team of engineers and designers set out to create a device that breaks the limitations of conventional smartphones, offering unprecedented extendibility.</p>
           </div>
           
           <div class="about-mission">
             <h3 class="about-mission-title" data-translation="about.mission.title">Our Mission</h3>
-            <p class="about-mission-content" data-translation="about.mission.content">We're on a mission to empower users with technology that adapts to their unique needs, rather than forcing them to adapt to technology. PocketCompute is designed to evolve with you, offering endless possibilities for customization and expansion.</p>
+            <p class="about-mission-content" data-translation="about.mission.content">We're on a mission to empower users and the community with technology that adapts to their unique needs, rather than forcing them to adapt to technology. PocketCompute is designed to evolve with you, offering endless possibilities for custom expansion and computing solutions.</p>
           </div>
           
           <div class="about-team">
             <h3 class="about-team-title" data-translation="about.team.title">Our Team</h3>
-            <p class="about-team-content" data-translation="about.team.content">Our diverse team brings together expertise from consumer electronics, software development, and hardware engineering. United by a passion for innovation, we're committed to pushing the boundaries of what's possible in personal technology.</p>
+            <p class="about-team-content" data-translation="about.team.content">PocketCompute is made up of a small passionate team, that brings together makers and creators just like you, with expertise from consumer electronics, software development, and hardware engineering. United by a love <i class="fa-regular fa-heart"></i> and passion for innovation, we're committed to pushing the boundaries of what's possible in technology.</p>
           </div>
         </div>
       </div>
@@ -666,7 +675,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-1">
-              <p class="accordion-answer" data-translation="faq.availability.answer">PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q2 2025. The first devices are expected to ship to backers in Q4 2025 to Q1 2026, with general availability planned for Q1 2026.</p>
+              <p class="accordion-answer" data-translation="faq.availability.answer">PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q2 2025. The first devices are expected to ship to Kickstarter backers in Q4 2025 to Q1 2026, with general availability planned for Q1 2026.</p>
             </div>
           </div>
           
@@ -676,7 +685,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-2">
-              <p class="accordion-answer" data-translation="faq.os.answer">PocketCompute runs on Android 14 and will be Google Mobile Services certified.</p>
+              <p class="accordion-answer" data-translation="faq.os.answer">PocketCompute comes with Android 14 and is Google Mobile Services certified.</p>
             </div>
           </div>
           
@@ -698,7 +707,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-3">
-              <p class="accordion-answer" data-translation="faq.payment.answer">PocketCompute's Tap and Pay feature uses Google's Android &quot;Tap to Pay&quot;, which means it is compatible with all major payment processors including Stripe, Square, Adyen, and many more. This allows you to bring your own SoftPOS system from the Google Play store, so you're not locked in, in any way or more so we hope for you to use our own purpose built and developer friendly SoftPOS system for PocketCompute which we will announce in the near future.</p>
+              <p class="accordion-answer" data-translation="faq.payment.answer">PocketCompute's Tap and Pay feature uses Google's Android &quot;Tap to Pay&quot;, making PocketCompute compatible with all major payment processors including Stripe, Square, Adyen, and many more. This allows you to bring your own SoftPOS system from the Google Play store, so you're not locked into any payment provider. <br /><br />We will also provide our own purpose built and developer friendly SoftPOS App for PocketCompute (which will be announced in the near future), this will allow you to quickly and easily integrate your Apps and Hardware for payment-ready applications, allowing for many new and exciting projects, to enable the community even further.</p>
             </div>
           </div>
 
@@ -708,7 +717,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-4">
-              <p class="accordion-answer" data-translation="faq.opensource_casing.answer">Both the small Front panel below the screen and the removable Back-cover panel designs will be open-sourced allowing you to change and modify these to suit your needs, as well as a general outline of the whole device will be made available on github, once the Kickstarter campaign has ended. We foresee makers and hobbyist developing their own attachments for PocketCompute to empower many more projects, and we hope to strongly support this community.</p>
+              <p class="accordion-answer" data-translation="faq.opensource_casing.answer">Both the small Front panel below the screen and the removable Back-cover panel designs will be available open-source allowing you to change and modify these to suit your needs, as well as a general outline of the whole device, will be made available on <a href="https://github.com/PocketCompute">GitHub</a> once the Kickstarter campaign has ended. <br /><br />We foresee makers and hobbyist developing their own attachments for PocketCompute to empower many more projects and applications, and we look forward to seeing these as they come.</p>
             </div>
           </div>
 
@@ -730,7 +739,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-6">
-              <p class="accordion-answer" data-translation="faq.deskmount.answer">A sideways deskmount will be available, as well as possibly a wall mounted design if there is enough demand (Please let us know). As well as this, we will open-source the general outline of PocketCompute allowing you to make any mounts, brackets, or attachments you desire.</p>
+              <p class="accordion-answer" data-translation="faq.deskmount.answer">Yes, a sideways Desk Mount will be available. A Wall-mountable frame will also be available if there's enough demand (please let us know). <br /><br />We will also open-source the general outline of PocketCompute allowing you to make any mounts, brackets, or attachments you desire. <br /><br />A community marketplace will also exist where you will be able to share any designs or sell any attachments you make for PocketCompute, allowing you to make money while also helping your fellow makers.</p>
             </div>
           </div>
 
@@ -750,7 +759,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-8">
-              <p class="accordion-answer" data-translation="faq.community.answer">Yes, we will set up a community for makers, creators and everyone else to buy and sell community made attachments and creations for PocketCompute, allowing you to make, sell and share your creations with the world! - Please let us know if this is something you would like.</p>
+              <p class="accordion-answer" data-translation="faq.community.answer">Yes, we will set up a community for makers, creators and everyone else to buy and sell community made attachments and creations for PocketCompute, allowing you to make, sell and share your creations with the world! - Sign up to our newsletter for announcements on this and much more.</p>
             </div>
           </div>
           
@@ -817,7 +826,7 @@
   <section id="kickstarter" class="cta">
     <div class="container opacity-0">
       <h2 class="cta-title" data-translation="cta.title">Ready to Experience the Future?</h2>
-      <p class="cta-subtitle" data-translation="cta.subtitle">Pre-order your <span class="asap-word">PocketCompute</span> device today and be the first to experience the future of mobile technology.</p>
+      <p class="cta-subtitle" data-translation="cta.subtitle">Pre-order your <span class="asap-word">PocketCompute</span> device today and be the first to experience the future of mini computing.</p>
       <a href="#" class="btn btn-white btn-lg btn-with-icon">
         <span data-translation="cta.button">Pre-order Now</span>
         <i class="fas fa-chevron-right btn-icon"></i>
@@ -834,7 +843,7 @@
             <!--<div class="footer-logo">PocketCompute</div>-->
             <div class="footer-logo"><div class="logo_text" id="svg-logo-2"></div></div>
             
-            <p class="footer-tagline" data-translation="footer.tagline">Redefining what a smart device can be.</p>
+            <p class="footer-tagline" data-translation="footer.tagline">Empowering the makers and creators of tomorrow.</p>
           </div>
           <div class="social-links footer-social-links">
             <a href="https://instagram.com/PocketCompute" class="social-link" aria-label="Instagram">

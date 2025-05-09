@@ -475,6 +475,10 @@ p {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  /* Only as wide as the text, so the shading transitions to the correct length of text */
+  display: inline-block;
+  width: fit-content;
 }
 
 /* Allow the PocketCompute text in the hero to fade in to apperance, more so after the font has loaded */
@@ -1905,13 +1909,13 @@ p {
   
   .hero-title {
     font-size: 2.5rem;
-    background: linear-gradient(90deg, var(--neutral-800) 0%, var(--primary) 100%);
+    /* background: linear-gradient(90deg, var(--neutral-800) 0%, var(--primary) 100%); */
     -webkit-background-clip: text;
     background-clip: text;
   }
   .hero-title div {
     font-size: 2.5rem;
-    background: linear-gradient(90deg, var(--neutral-800) 0%, var(--primary) 100%);
+    /* background: linear-gradient(90deg, var(--neutral-800) 0%, var(--primary) 100%); */
     -webkit-background-clip: text;
     background-clip: text;
   }
@@ -1985,7 +1989,7 @@ p {
   }
   
   .hero {
-    padding: 6rem 0 3rem;
+    padding: 9rem 0 3rem;
   }
   
   .hero-title {
@@ -2075,7 +2079,7 @@ p {
   .hero-title {
     font-size: 1.75rem;
   }
-  
+
   /*
   .hero-title div {
     font-size: 1.75rem;

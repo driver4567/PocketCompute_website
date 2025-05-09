@@ -1,6 +1,6 @@
 // Language Setup
 const languages = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'en', name: 'English', flag: '🇬🇧' },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'ja', name: '日本語', flag: '🇯🇵' },
@@ -27,7 +27,7 @@ const translations = {
     },
     hero: {
       title: "introducing... <br><div style='font-family:Asap;'>&nbsp PocketCompute</div>",
-      subtitle: "the World's First <b>payment ready</b> <i>multi-functional mini computer</i> for <b>Makers</b> and <b>Creators</b>",
+      subtitle: "the World's First <b>payment</b> ready <i><b>mini computer</b></i> for <b>Makers</b> and <b>Creators</b>",
       kickstarterButton: "Support on Kickstarter",
       learnMoreButton: "Learn More",
       deviceImageAlt: "PocketCompute",
@@ -69,7 +69,7 @@ const translations = {
         title: "Connectivity",
         description: "As well as being a smartphone with every feature you’d expect, PocketCompute also features computer ports to enable a multitude of hardware applications, including acting as a mini-computer or dedicated server.",
         features: {
-          usb: "3 x USB 2.0 ports <br />+ 1 internal USB 2.0",
+          usb: "3 x USB 2.0 ports <br />+ 1 x internal USB 2.0",
           hdmi: "HDMI out (available with attachment)",
           audio: "3.5mm Audio jack for audio",
           ethernet: "RJ45 Ethernet port",
@@ -84,17 +84,19 @@ const translations = {
           nfc: "Enhanced NFC capabilities",
           secure: "Secure payment processing",
           pos: "Perform POS functionality",
-          readWrite: "Read and Write NFC tokens"
+          readWrite: "Read and Write NFC tokens",
+          accessControl: "RFID / NFC access control"
         },
         ImageSubText: "Use PocketCompute to receive Payments"
       },
       expansion: {
-        title: "Microcontroller Expansion",
-        description: "As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCB’s or micro-controllers, including an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers, who wish to extend PocketCompute’s functionality even further.",
+        title: "Universal Handheld Control hub",
+        description: "As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCB’s or micro-controllers, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers who wish to extend PocketCompute’s functionality to any number of applications with no bounds.",
         features: {
           usb: "Internal USB expansion port",
           modules: "IoT applications",
-          sdk: "Open-source 3D models of back and front removable Panels to allow for custom designs"
+          sdk: "Open-source printable 3D models of back and front removable Panels to allow for custom designs &amp; configurations",
+          controlHub: "Smart control hub"
         },
         ImageSubText: "Remove the backcover with two screws and extend PocketCompute’s functionality with additional Microcontrollers or Electionics. Pictured here a red Arduino Nano clone ready to be connected to PocketCompute's internal USB and a Raspberry Pi Pico to the side."
       }
@@ -114,20 +116,20 @@ const translations = {
     },
     about: {
       title: "About PocketCompute",
-      subtitle: "Learn more about our mission to revolutionize personal technology.",
+      subtitle: "Learn more about our mission to help advance handheld technology and smart control hubs.",
       imageAlt: "PocketCompute Team",
       foundedText: "Founded in 2024, PocketCompute is redefining what a smartphone can be.",
       story: {
         title: "Our Story",
-        content: "PocketCompute was born from a simple question: Why can't our smartphones do more? Our team of engineers and designers set out to create a device that breaks the limitations of conventional smartphones, offering unprecedented customization and expandability."
+        content: "PocketCompute was born from a simple question: Why can't our smartphones do more? Our team of engineers and designers set out to create a device that breaks the limitations of conventional smartphones, offering unprecedented extendibility."
       },
       mission: {
         title: "Our Mission",
-        content: "We're on a mission to empower users with technology that adapts to their unique needs, rather than forcing them to adapt to technology. PocketCompute is designed to evolve with you, offering endless possibilities for customization and expansion."
+        content: "We're on a mission to empower users and the community with technology that adapts to their unique needs, rather than forcing them to adapt to technology. PocketCompute is designed to evolve with you, offering endless possibilities for custom expansion and computing solutions."
       },
       team: {
         title: "Our Team",
-        content: "Our diverse team brings together expertise from consumer electronics, software development, and hardware engineering. United by a passion for innovation, we're committed to pushing the boundaries of what's possible in personal technology."
+        content: "PocketCompute is made up of a small passionate team, that brings together makers and creators just like you, with expertise from consumer electronics, software development, and hardware engineering. United by a love <i class='fa-regular fa-heart'></i> and passion for innovation, we're committed to pushing the boundaries of what's possible in technology."
       }
     },
     faq: {
@@ -135,11 +137,11 @@ const translations = {
       subtitle: "Find answers to common questions about PocketCompute.",
       availability: {
         question: "When will PocketCompute be available?",
-        answer: "PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q2 2025. The first devices are expected to ship to backers in Q4 2025 to Q1 2026, with general availability planned for Q2 2025."
+        answer: "PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q2 2025. The first devices are expected to ship to Kickstarter backers in Q4 2025 to Q1 2026, with general availability planned for Q1 2026."
       },
       os: {
         question: "What operating system does PocketCompute run?",
-        answer: "PocketCompute runs on Android 14 and will be Google Mobile Services certified."
+        answer: "PocketCompute comes with Android 14 and is Google Mobile Services certified."
       },
       expansion: {
         question: "How does the microcontroller expansion work?",
@@ -147,11 +149,11 @@ const translations = {
       },
       payment: {
         question: "What payment processors are supported for Tap and Pay?",
-        answer: "PocketCompute's Tap and Pay feature uses Google's Android &quot; Tap to Pay&quot;, which means it is compatible with all major payment processors including Stripe, Square, Adyen, and many more. This allows you to bring your own SoftPOS system from the Google Play store, so you’re not locked in, in any way or more so we hope for you to use our own purpose built and developer friendly SoftPOS system for PocketCompute which we will announce in the near future."
+        answer: "PocketCompute's Tap and Pay feature uses Google's Android &quot;Tap to Pay&quot;, making PocketCompute compatible with all major payment processors including Stripe, Square, Adyen, and many more. This allows you to bring your own SoftPOS system from the Google Play store, so you're not locked into any payment provider. <br /><br />We will also provide our own purpose built and developer friendly SoftPOS App for PocketCompute (which will be announced in the near future), this will allow you to quickly and easily integrate your Apps and Hardware for payment-ready applications, allowing for many new and exciting projects, to enable the community even further."
       },
       opensource_casing: {
         question: "Are the outer casings designs open-source?",
-        answer: "Both the small Front panel below the screen and the removable Back-cover panel designs will be open-sourced allowing you to change and modify these to suit your needs, as well as a general outline of the whole device will be made available on github, once the Kickstarter campaign has ended. We foresee makers and hobbyist developing their own attachments for PocketCompute to empower many more projects, and we hope to strongly support this community."
+        answer: "Both the small Front panel below the screen and the removable Back-cover panel designs will be available open-source allowing you to change and modify these to suit your needs, as well as a general outline of the whole device, will be made available on <a href='https://github.com/PocketCompute'>GitHub</a> once the Kickstarter campaign has ended. <br /><br />We foresee makers and hobbyist developing their own attachments for PocketCompute to empower many more projects and applications, and we look forward to seeing these as they come."
       },
       attachments: {
         question: "What attachments are available?",
@@ -159,7 +161,7 @@ const translations = {
       },
       deskmount: {
         question: "Is a stand or desk mount available?",
-        answer: "A sideways deskmount will be available, as well as possibly a wall mounted design if there is enough demand (Please let us know). As well as this, we will open-source the general outline of PocketCompute allowing you to make any mounts, brackets, or attachments you desire."
+        answer: "Yes, a sideways Desk Mount will be available. A Wall-mountable frame will also be available if there's enough demand (please let us know). <br /><br />We will also open-source the general outline of PocketCompute allowing you to make any mounts, brackets, or attachments you desire. <br /><br />A community marketplace will also exist where you will be able to share any designs or sell any attachments you make for PocketCompute, allowing you to make money while also helping your fellow makers."
       },
       pantented: {
         question: "Is PocketCompute Patented?",
@@ -167,7 +169,7 @@ const translations = {
       },
       community: {
         question: "Will there be a place where we can buy and sell attachments?",
-        answer: "Yes, we will set up a community for makers, creators and everyone else to buy and sell community made attachments and creations for PocketCompute, allowing you to sell and share your creations with the world! - Please let us know if this is something you would like."
+        answer: "Yes, we will set up a community for makers, creators and everyone else to buy and sell community made attachments and creations for PocketCompute, allowing you to make, sell and share your creations with the world! - Sign up to our newsletter for announcements on this and much more."
       },
       specs: {
         question: "What are the specifications of PocketCompute?",
@@ -209,11 +211,11 @@ const translations = {
     },
     cta: {
       title: "Ready to Experience the Future?",
-      subtitle: "Pre-order your <span class='asap-word'>PocketCompute</span> device today and be the first to experience the future of mobile technology.",
+      subtitle: "Pre-order your <span class='asap-word'>PocketCompute</span> device today and be the first to experience the future of mini computing.",
       button: "Pre-order Now"
     },
     footer: {
-      tagline: "Redefining what a smart device can be.",
+      tagline: "Empowering the makers and creators of tomorrow.",
       copyright: "© 2025 PocketCompute. All rights reserved.",
       quickLinks: {
         title: "Quick Links",

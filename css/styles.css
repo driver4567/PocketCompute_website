@@ -450,6 +450,10 @@ p {
   align-items: center;
 }
 
+.hero .row {
+  align-items: center;
+}
+
 .hero-content {
   margin-bottom: 2rem;
   position: relative;
@@ -464,7 +468,7 @@ p {
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0rem;
   color: var(--neutral-900);
   letter-spacing: -0.02em;
   background: linear-gradient(90deg, var(--neutral-900) 0%, var(--primary) 100%);
@@ -488,6 +492,7 @@ p {
 
   opacity: 0;
   animation: fadeIn 1.3s ease-in forwards;
+  white-space: nowrap;
 }
 
 .hero-subtitle {
@@ -942,7 +947,7 @@ p {
 
 .video-coming-soon-title {
   font-size: 1.5rem;
-  margin-bottom: 10rem;
+  margin-bottom: 9.5rem;
 }
 
 .video-countdown {
@@ -1904,6 +1909,12 @@ p {
     -webkit-background-clip: text;
     background-clip: text;
   }
+  .hero-title div {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, var(--neutral-800) 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
   
   .hero-subtitle {
     font-size: 1.1rem;
@@ -1978,6 +1989,9 @@ p {
   }
   
   .hero-title {
+    font-size: 2rem;
+  }
+  .hero-title div {
     font-size: 2rem;
   }
   
@@ -2059,6 +2073,9 @@ p {
 
 @media (max-width: 380px) {
   .hero-title {
+    font-size: 1.75rem;
+  }
+  .hero-title div {
     font-size: 1.75rem;
   }
   

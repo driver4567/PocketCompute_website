@@ -9,7 +9,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link class="preload_font" href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,700&text=PckCompute&display=swap" rel="stylesheet">
+  <!-- <link class="preload_font" href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,700&text=PckCompute&display=swap" rel="stylesheet"> -->
   
 
   <!-- 
@@ -18,13 +18,16 @@
     This is required for Apple devices, as Apple for Safari and for Chrome (since they force google to) both use UIWebView orWKWebView, which doesn't load the fonts
     With out this, I could just serve the font locally on the server
   -->
+  
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  
   <script>
     //var WebFont = require('webfontloader');
     
+    //families: ['Asap:700italic', 'Asap:italic,700', 'Asap:ital,wght@1,700'],
     WebFont.load({
       google: {
-        families: ['Asap:700italic', 'Asap:italic,700', 'Asap:ital,wght@1,700'],
+        families: ['Asap:700italic'],
         text: 'PckCompute'
       }
       /*,
@@ -39,15 +42,17 @@
       }*/
     });
   </script>
+  
 
-    <style type="text/css">
-      @font-face {
-        font-family: 'Asap';
-        font-weight: 700;
-        font-style: italic;
-        src: url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,700&text=PckCompute&display=swap');
-      }
-    </style>
+  <!-- for iOS -->
+  <style type="text/css">
+    @font-face {
+      font-family: 'Asap';
+      font-weight: 700;
+      font-style: italic;
+      src: url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,700&text=PckCompute&display=swap');
+    }
+  </style>
 
   <!-- Inline SVG Logo -->
   <script>
@@ -268,7 +273,7 @@
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">-->
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- Image Gallery Carousel, using splidejs -->

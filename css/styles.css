@@ -497,6 +497,8 @@ p {
   opacity: 0;
   animation: fadeIn 1.3s ease-in forwards;
   white-space: nowrap;
+  font-family:'Asap', sans-serif; 
+  font-style: italic;
 }
 
 .hero-subtitle {

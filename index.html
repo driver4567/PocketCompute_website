@@ -6,9 +6,34 @@
   <title>PocketCompute - A multi-functional mini computer</title>
 
   <!-- Preload Google Font -->
+  <!--
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link class="preload_font" href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,700&text=PckCompute&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  -->
+  
+  <!-- 
+    From: https://github.com/typekit/webfontloader 
+    This will load the font synchronously, the package has options for asynchronously also.
+  -->
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Asap:ital,wght@1,700&text=PckCompute']
+      }
+      /*,
+      active: function() {
+        // Font loaded successfully
+        document.getElementById("logo").classList.add("font-loaded");
+      },
+      inactive: function() {
+        // Font failed to load
+        console.error("Asap font failed to load");
+        document.getElementById("logo").classList.add("font-loaded"); // Show with fallback
+      }*/
+    });
+  </script>
 
   <!-- Inline SVG Logo -->
   <script>

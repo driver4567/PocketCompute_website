@@ -26,7 +26,7 @@ const translations = {
       closeMenu: "Close menu"
     },
     hero: {
-      title: "introducing... <br><div style='font-family:Asap;'>&nbsp PocketCompute</div>",
+      title: "introducing... <br><div style='font-family:'Asap', sans-serif;'>&nbsp PocketCompute</div>",
       subtitle: "the World's First <b>payment</b> ready <i><b>mini computer</b></i> for <b>Makers</b> and <b>Creators</b>",
       kickstarterButton: "Support on Kickstarter",
       learnMoreButton: "Learn More",

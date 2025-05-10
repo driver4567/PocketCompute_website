@@ -527,7 +527,7 @@ p {
   /*background: linear-gradient(135deg, #4f46e5, #3730a3);*/
   margin-left: auto;
   margin-right: auto;
-  min-width: 300px;
+  min-width: 260px;
 }
 
 .hero-image-container:hover {
@@ -1942,7 +1942,7 @@ p {
   
   .hero-image-container {
     /* height: 300px; */
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     transform: rotate(0);
   }
   

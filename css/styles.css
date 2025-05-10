@@ -517,8 +517,8 @@ p {
 
 .hero-image-container {
   position: relative;
-  height: 578px; /* was 450px; */
-  width: 478px;
+  /* height: 578px; */ /* was 450px; */
+  /* width: 478px; */
   border-radius: var(--rounded-xl);
   overflow: hidden;
   box-shadow: var(--shadow-xl);
@@ -527,6 +527,7 @@ p {
   /*background: linear-gradient(135deg, #4f46e5, #3730a3);*/
   margin-left: auto;
   margin-right: auto;
+  min-width: 300px;
 }
 
 .hero-image-container:hover {
@@ -538,6 +539,7 @@ p {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  display: block;
 }
 
 .hero-discount {

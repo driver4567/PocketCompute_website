@@ -10,13 +10,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link class="preload_font" href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,700&text=PckCompute&display=swap" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
   -->
-  
+
   <!-- 
     From: https://github.com/typekit/webfontloader 
     This will load the font synchronously, the package has options for asynchronously also.
+    This is required for Apple devices, as Apple for Safari and for Chrome (since they force google to) both use UIWebView orWKWebView, which doesn't load the fonts
+    With out this, I could just serve the font locally on the server
   -->
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
   <script>
     WebFont.load({
       google: {

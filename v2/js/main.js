@@ -1,17 +1,3 @@
-// For Debug
-/*
-(function(originalFetch) {
-  window.fetch = function(...args) {
-    const url = args[0];
-    if (typeof url === 'string' && url.includes('site.webmanifest')) {
-      console.log('Fetching webmanifest:', url);
-      console.trace();
-    }
-    return originalFetch.apply(this, args);
-  };
-})(window.fetch);
-*/
-
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize Handlebars and translations
   window.i18n.initHandlebars();
@@ -24,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeEvents();
   // Update translations when language changes
   //document.addEventListener('language-changed', initializeTranslations);
-  document.addEventListener('language-changed', window.i18n.renderTemplates);
+  //document.addEventListener('language-changed', window.i18n.renderTemplates);  //<-- I did have this in place but it was causing renderTemplates to run a second time
 
   
   // Initialize animations

@@ -103,7 +103,8 @@ const translations = {
           secure: "Secure payment processing",
           pos: "Perform POS functionality",
           readWrite: "Read and Write NFC &amp; RFID tokens",
-          accessControl: "Token &amp; Swipe card access control"
+          accessControl: "Token &amp; Swipe card access control",
+          offlinePayments: "Offline payment capability*"
         },
         ImageSubText: "Use PocketCompute to receive Payments"
       },
@@ -1210,8 +1211,8 @@ const setLanguage = (langCode) => {
   if (translations[langCode]) {  // providing the language is in the available translations..
 
     // only update the language if it's different to the defualt - so if it's already set to english, there is no need to update it
-    console.log(langCode);
-    console.log(currentLanguage);
+    //console.log(langCode);
+    //console.log(currentLanguage);
     if (langCode != currentLanguage) {
 
       currentLanguage = langCode;
@@ -1243,10 +1244,8 @@ const setLanguage = (langCode) => {
 // Get browser language
 const getBrowserLanguage = () => {
 
-  console.log('getBrowserLang');
-
   const browserLang = navigator.language || navigator.userLanguage;
-  console.log(browserLang);
+  //console.log("getBrowserLang " + browserLang);
   
   // Convert to base language code (e.g., 'en-US' -> 'en')
   const baseLang = browserLang.split('-')[0];

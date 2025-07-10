@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <meta name="google" content="notranslate">  for debug -->
+  <meta name="google" content="notranslate">   <!--This turns off the browers translate, handy for debug -->
   <title>PocketCompute - A multi-functional mini computer</title>
 
   <!-- Preload Google Font -->
@@ -206,7 +206,7 @@
                 //for English flag
                 // On chrome not rendering the flag unicode, I get 203, on firefox while rendering I get 428
                 //window.alert(nonTransparentPixels); 
-                console.log(nonTransparentPixels);
+                //console.log(nonTransparentPixels);
 
         
                 // If the emoji renders as a flag, it should have significant non-transparent pixels
@@ -279,7 +279,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="manifest" href="favicon/site.webmanifest"> <!-- removed while Debug -->
+  <link rel="manifest" href="favicon/site.webmanifest"> <!-- removed while Debug, when running locally -->
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -559,6 +559,10 @@
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fab fa-nfc-symbol"></i></span>
               <span data-translation="functions.payment.features.accessControl">Token &amp; Swipe card access control</span>
+            </li>
+            <li class="function-feature">
+              <span class="function-feature-icon"><i class="fa-solid fa-phone-slash"></i></span>
+              <span data-translation="functions.payment.features.offlinePayments">Offline payment capability*</span>
             </li>
           </ul>
         </div>

@@ -35,7 +35,8 @@ video.addEventListener('loadedmetadata', () => {
     // Detect if this is an MP4 file
     const videoSrc = video.src || video.currentSrc || '';
 
-   alert(videoSrc);
+    console.log(videoSrc);
+    alert(videoSrc);
 
     //REMOVING the slow scroll for MP4, as I have added in more keyframes to fix the jittery scroll issue, thus a slower scroll is not needed
     //isMP4 = videoSrc.toLowerCase().includes('.mp4') || video.videoTracks?.[0]?.codecPrivate?.includes('avc') || false;

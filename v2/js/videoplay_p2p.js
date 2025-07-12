@@ -28,15 +28,15 @@ const MP4_SEEK_DAMPENING = 0.6; // Additional dampening for MP4 files
 // or is the video below the hero-content, where there is more vertical scroll to be had and I want a slower scroll
 let videoBelowText = false;
 
-console.log(video.src);
-alert(video.src);
-
 // --- Initialization ---
 video.addEventListener('loadedmetadata', () => {
     videoDuration = video.duration;
     
     // Detect if this is an MP4 file
     const videoSrc = video.src || video.currentSrc || '';
+
+    console.log(videoSrc);
+    alert(videoSrc);
 
     //REMOVING the slow scroll for MP4, as I have added in more keyframes to fix the jittery scroll issue, thus a slower scroll is not needed
     //isMP4 = videoSrc.toLowerCase().includes('.mp4') || video.videoTracks?.[0]?.codecPrivate?.includes('avc') || false;

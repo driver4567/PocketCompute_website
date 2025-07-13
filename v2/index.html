@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google" content="notranslate">   <!--This turns off the browers translate, handy for debug -->
+  <!-- <meta name="google" content="notranslate">  -->  <!--This turns off the browers translate, handy for debug -->
   <title>PocketCompute - A multi-functional mini computer</title>
 
   <!-- Preload Google Font -->
@@ -383,7 +383,7 @@
                     class="hero-image hidden"> <!--  preload="metadata" -->
 
                 <!-- the logic of the order, vp9 is best quality, but mp4 is half the size  -->
-                <source src="video/animation_every16keyframes_h264.mp4" type="video/mp4">
+                <!--<source src="video/animation_every16keyframes_h264.mp4" type="video/mp4"> -->
                 <source src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
                 <source src="video/animate1_vp8.webm" type="video/webm; codecs=vp8">
             </video>
@@ -397,6 +397,10 @@
         </div>
       </div>
       
+      <p class="mockConsole"> <!-- For debug notes of video -->
+        ...
+      </p>
+
       <div class="social-links">
         <a href="https://instagram.com/PocketCompute" class="social-link" aria-label="Instagram">
           <i class="fab fa-instagram"></i>
@@ -580,7 +584,7 @@
       <div class="function-item">
         <div class="function-content">
           <h3 class="function-title" data-translation="functions.expansion.title">Universal Handheld Control hub</h3>
-          <p class="function-description" data-translation="functions.expansion.description">As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCB's or micro-controllers, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers who wish to extend PocketCompute’s functionality to any number of applications with no bounds.</p>
+          <p class="function-description" data-translation="functions.expansion.description">As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCBs, microcontrollers or other gadgetry, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers who wish to extend PocketCompute’s functionality to any number of applications with no bounds.</p>
           <ul class="function-features-list">
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fas fa-plus"></i></span>
@@ -604,7 +608,7 @@
           <div class="function-image-container">
             <img src="images/Adding_Microcontrollers.jpg" alt="Microcontroller Expansion" class="function-image">
             <div class="function-image-overlay">
-              <p class="function-image-subtext" data-translation="functions.expansion.ImageSubText">Remove the backcover with two screws and extend PocketCompute's functionality with additional Microcontrollers or Electionics. Pictured here a red Arduino Nano clone ready to be connected to PocketCompute's internal USB and a Raspberry Pi Pico to the side.</p>
+              <p class="function-image-subtext" data-translation="functions.expansion.ImageSubText">Remove the backcover with two screws and extend PocketCompute's functionality with additional Microcontrollers or Electionics. Pictured here for illustrative purposes a red Arduino Nano clone ready to be connected to PocketCompute's internal USB and a Raspberry Pi Pico to the side.</p>
             </div>
           </div>
         </div>
@@ -736,12 +740,12 @@
           
           <div class="about-mission">
             <h3 class="about-mission-title" data-translation="about.mission.title">Our Mission</h3>
-            <p class="about-mission-content" data-translation="about.mission.content">We're on a mission to empower users and the community with technology that adapts to their unique needs, rather than forcing them to adapt to technology. PocketCompute is designed to evolve with you, offering endless possibilities for custom expansion and computing solutions.</p>
+            <p class="about-mission-content" data-translation="about.mission.content">We're on a mission to empower users and the community with technology that adapts to their unique needs and enables the change makers of tomorrow. PocketCompute is designed to evolve with you, offering endless possibilities for custom expansion and computing solutions.</p>
           </div>
           
           <div class="about-team">
             <h3 class="about-team-title" data-translation="about.team.title">Our Team</h3>
-            <p class="about-team-content" data-translation="about.team.content">PocketCompute is made up of a small passionate team, that brings together makers and creators just like you, with expertise from consumer electronics, software development, and hardware engineering. United by a love <i class="fa-regular fa-heart"></i> and passion for innovation, we're committed to pushing the boundaries of what's possible in technology.</p>
+            <p class="about-team-content" data-translation="about.team.content">PocketCompute is made up of a small passionate team, that brings together makers and creators just like you, with expertise from consumer electronics, software development, and hardware engineering. United by a love <i class="fa-regular fa-heart"></i> and passion for innovation, we're committed to helping our users push the boundaries of what's possible through technology.</p>
           </div>
         </div>
       </div>
@@ -764,7 +768,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-1">
-              <p class="accordion-answer" data-translation="faq.availability.answer">PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q2 2025. The first devices are expected to ship to Kickstarter backers in Q4 2025 to Q1 2026, with general availability planned for Q1 2026.</p>
+              <p class="accordion-answer" data-translation="faq.availability.answer">PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q3 2025. The first devices are expected to ship to Kickstarter backers in Q1 2026 to Q2 2026, with general availability planned for Q2 2026.</p>
             </div>
           </div>
           
@@ -915,7 +919,7 @@
   <section id="kickstarter" class="cta">
     <div class="container opacity-0">
       <h2 class="cta-title" data-translation="cta.title">Ready to Experience the Future?</h2>
-      <p class="cta-subtitle" data-translation="cta.subtitle">Pre-order your <span class="asap-word">PocketCompute</span> device today and be the first to experience the future of mini computing.</p>
+      <p class="cta-subtitle" data-translation="cta.subtitle">Pre-order your <span class="asap-word">PocketCompute</span> device today and be the first to experience the future of mini-computing.</p>
       <a href="#" class="btn btn-white btn-lg btn-with-icon">
         <span data-translation="cta.button">Pre-order Now</span>
         <i class="fas fa-chevron-right btn-icon"></i>

@@ -28,6 +28,23 @@ const MP4_SEEK_DAMPENING = 0.6; // Additional dampening for MP4 files
 // or is the video below the hero-content, where there is more vertical scroll to be had and I want a slower scroll
 let videoBelowText = false;
 
+// For debug notes of video
+//const paragraph = document.querySelector('.mockConsole');
+
+/*// Rate-limiting for seeks to reduce jank
+const SEEK_INTERVAL_MS = /firefox/i.test(navigator.userAgent) ? 100 : 33; // Adjust based on testing
+let lastSeekTimestamp = 0;
+
+function maybeSeek(time) {
+  const now = performance.now();
+  if (now - lastSeekTimestamp > SEEK_INTERVAL_MS) {
+    batchedSeek(time);
+    lastSeekTimestamp = now;
+  }
+}*/
+
+
+
 // --- Initialization ---
 video.addEventListener('loadedmetadata', () => {
     videoDuration = video.duration;
@@ -131,6 +148,8 @@ function startSmoothSeekLoop() {
             const absTimeDiff = Math.abs(timeDiff);
             
             if (absTimeDiff > MIN_TIME_DIFF) {
+                //paragraph.textContent = 'absTimeDiff > MIN_TIME_DIFF [' + absTimeDiff + ']';
+
                 // Dynamic smoothing based on format and scroll state
                 let smoothing = SEEK_SMOOTHING;
                 
@@ -162,10 +181,18 @@ function startSmoothSeekLoop() {
                 
                 // Use batched seeking for MP4
                 batchedSeek(currentDisplayTime);
+                // Use the rate-limited version
+                //maybeSeek(currentDisplayTime);
             } else {
+                //paragraph.textContent = 'absTimeDiff <=  MIN_TIME_DIFF [' + absTimeDiff + ']';
+
                 // Close enough - snap to target and stop animating
                 currentDisplayTime = targetTime;
+
+                // Use batched seeking for MP4
                 batchedSeek(targetTime);
+                // Use the rate-limited version
+                //maybeSeek(targetTime);
                 
                 if (!isScrolling) {
                     isAnimating = false;
@@ -323,6 +350,29 @@ function swapImageToVideo() {
         console.log('Browser does not support video');
         return;
     }
+
+
+    // Dynamicly load video source based on browser
+
+    //place in video... this is conditional based on browser (where I don't load the mp4 for some browsers), because it was scrolling badly
+    const browser = getBrowserType();
+    //console.log(browser);
+
+    if (browser.useWebM) {
+        // Prefer WebM for Firefox and Android Chrome
+        video.innerHTML = `
+            <source src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
+            <source src="video/animate1_vp8.webm" type="video/webm; codecs=vp8">
+        `;
+    } else {
+        // Default to MP4 for Safari, iOS, Desktop Chrome
+        video.innerHTML = `
+            <source src="video/animation_every16keyframes_h264.mp4" type="video/mp4">
+            <source src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
+            <source src="video/animate1_vp8.webm" type="video/webm; codecs=vp8">
+        `;
+    }
+
     
     // Set up video event listeners
     video.addEventListener('loadeddata', function() {
@@ -347,12 +397,24 @@ function swapImageToVideo() {
     video.load();
 }
 
+function getBrowserType() {
+    const ua = navigator.userAgent.toLowerCase();
+
+    const isFirefox = ua.includes('firefox');
+    const isAndroid = ua.includes('android') && ua.includes('chrome');
+    
+    return { //return list eg.  {useWebM: false, isFirefox: false, isAndroidChrome: false} 
+        useWebM: isFirefox || isAndroid, // Customize as needed
+        isFirefox,
+        isAndroidChrome: isAndroid
+    };
+}
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     //console.log('Page loaded, starting video check and load');
     swapImageToVideo();
 });
-
 
 
 //------------------------------------------------------------------------------------------------------------------------------------

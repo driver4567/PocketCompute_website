@@ -57,6 +57,7 @@ video.addEventListener('loadedmetadata', () => {
     
     totalFrames = Math.round(videoDuration * videoFPS);
     //console.log(`Video type: ${isMP4 ? 'MP4' : 'Other'}, FPS: ${videoFPS}, Total Frames: ${totalFrames}, Duration: ${videoDuration}s`);
+    alert(`Video type: ${isMP4 ? 'MP4' : 'Other'}, FPS: ${videoFPS}, Total Frames: ${totalFrames}, Duration: ${videoDuration}s`);
 
     setupVideo();
     

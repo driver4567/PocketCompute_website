@@ -64,7 +64,7 @@ video.addEventListener('loadedmetadata', () => {
     // Set scroll height - reduce for MP4 to make scrubbing less sensitive
     // NOTE: this means for every 15px of vertical movement the MP4 goes 1 frame
     //const scrollHeightPerFrame = isMP4 ? 15 : 10; // More scroll needed per frame for MP4
-    const scrollHeightPerFrame = 15; //changing cause I think this still looks ok. <--- ** But this is an important setting
+    const scrollHeightPerFrame = 10; //changing cause I think this still looks ok. <--- ** But this is an important setting
     const minScrollHeight = window.innerHeight * 3;
     const calculatedHeight = totalFrames * scrollHeightPerFrame;
     document.body.style.height = `${Math.max(minScrollHeight, calculatedHeight)}px`;

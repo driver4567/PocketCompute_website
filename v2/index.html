@@ -383,9 +383,12 @@
                     class="hero-image hidden"> <!--  preload="metadata" -->
 
                 <!-- the logic of the order, vp9 is best quality, but mp4 is half the size  -->
-                <!--<source src="video/animation_every16keyframes_h264.mp4" type="video/mp4"> -->
+                <!-- loaded dynamicly instead, since Chrome on Android and Firefox on Desktop, don't seek well for mp4 (ie. don't scroll smoothly). 
+                     So this is set in swapImageToVideo() in videoplay_p2p.js
+                <source src="video/animation_every16keyframes_h264.mp4" type="video/mp4">
                 <source src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
                 <source src="video/animate1_vp8.webm" type="video/webm; codecs=vp8">
+                -->
             </video>
 
             <!-- Canvas to render video frames -->
@@ -397,9 +400,10 @@
         </div>
       </div>
       
-      <p class="mockConsole"> <!-- For debug notes of video -->
+      <!-- For debug notes of video -->
+      <!-- <p class="mockConsole">
         ...
-      </p>
+      </p> -->
 
       <div class="social-links">
         <a href="https://instagram.com/PocketCompute" class="social-link" aria-label="Instagram">

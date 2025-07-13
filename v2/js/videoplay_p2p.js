@@ -35,6 +35,9 @@ video.addEventListener('loadedmetadata', () => {
     // Detect if this is an MP4 file
     const videoSrc = video.src || video.currentSrc || '';
 
+    //console.log(videoSrc);
+    //alert(videoSrc);
+
     //REMOVING the slow scroll for MP4, as I have added in more keyframes to fix the jittery scroll issue, thus a slower scroll is not needed
     //isMP4 = videoSrc.toLowerCase().includes('.mp4') || video.videoTracks?.[0]?.codecPrivate?.includes('avc') || false;
     //CHANGING the intension of this switch, I will not use this switch for slower scrolling when using MP4, instead I will use this for when the 
@@ -54,13 +57,14 @@ video.addEventListener('loadedmetadata', () => {
     
     totalFrames = Math.round(videoDuration * videoFPS);
     //console.log(`Video type: ${isMP4 ? 'MP4' : 'Other'}, FPS: ${videoFPS}, Total Frames: ${totalFrames}, Duration: ${videoDuration}s`);
+    //alert(`Video type: ${isMP4 ? 'MP4' : 'Other'}, FPS: ${videoFPS}, Total Frames: ${totalFrames}, Duration: ${videoDuration}s`);
 
     setupVideo();
     
     // Set scroll height - reduce for MP4 to make scrubbing less sensitive
     // NOTE: this means for every 15px of vertical movement the MP4 goes 1 frame
     //const scrollHeightPerFrame = isMP4 ? 15 : 10; // More scroll needed per frame for MP4
-    const scrollHeightPerFrame = 10; //changing cause I think this still looks ok. <--- ** But this is an important setting
+    const scrollHeightPerFrame = 15; //changing cause I think this still looks ok. <--- ** But this is an important setting
     const minScrollHeight = window.innerHeight * 3;
     const calculatedHeight = totalFrames * scrollHeightPerFrame;
     document.body.style.height = `${Math.max(minScrollHeight, calculatedHeight)}px`;

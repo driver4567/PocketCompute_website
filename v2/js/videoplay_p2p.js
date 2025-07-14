@@ -352,9 +352,7 @@ function swapImageToVideo() {
     }
 
 
-    // Dynamicly load video source based on browser
-
-    //place in video... this is conditional based on browser (where I don't load the mp4 for some browsers), because it was scrolling badly
+    //only allow certain video types based on browser... this is conditional based on browser (where I don't load the mp4 for some browsers), because it was scrolling badly
     const browser = getBrowserType();
     //console.log(browser);
 
@@ -363,23 +361,8 @@ function swapImageToVideo() {
         const mp4Source = document.getElementById('src-mp4');
         if (mp4Source) {
             video.removeChild(mp4Source);
-            console.log('Removed MP4 source for better compatibility');
+            //console.log('Removed MP4 source for better compatibility');
         }
-        
-        /*
-        // Prefer WebM for Firefox and Android Chrome
-        video.innerHTML = `
-            <source src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
-            <source src="video/animate1_vp8.webm" type="video/webm; codecs=vp8">
-        `;
-    } else {
-        // Default to MP4 for Safari, iOS, Desktop Chrome
-        video.innerHTML = `
-            <source src="video/animation_every16keyframes_h264.mp4" type="video/mp4">
-            <source src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
-            <source src="video/animate1_vp8.webm" type="video/webm; codecs=vp8">
-        `;
-        */
     }
 
     

@@ -359,6 +359,14 @@ function swapImageToVideo() {
     //console.log(browser);
 
     if (browser.useWebM) {
+        //remove the mp4 as a video source option if the browser doesn't support it well for scroll
+        const mp4Source = document.getElementById('src-mp4');
+        if (mp4Source) {
+            video.removeChild(mp4Source);
+            console.log('Removed MP4 source for better compatibility');
+        }
+        
+        /*
         // Prefer WebM for Firefox and Android Chrome
         video.innerHTML = `
             <source src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
@@ -371,6 +379,7 @@ function swapImageToVideo() {
             <source src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
             <source src="video/animate1_vp8.webm" type="video/webm; codecs=vp8">
         `;
+        */
     }
 
     

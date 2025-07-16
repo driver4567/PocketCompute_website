@@ -36,7 +36,7 @@ function initAnimations() {
     { selector: '.hero-image-container', animation: 'slide-right', delay: 0 },
     { selector: '.hero-discount', animation: 'fade-in', delay: 300 },
     { selector: '.section-header', animation: 'slide-up', delay: 0 },
-    { selector: '.feature-card', animation: 'slide-up', delay: 100, staggered: true },
+    //{ selector: '.feature-card', animation: 'slide-up', delay: 100, staggered: true },
     { selector: '.function-tabs', animation: 'slide-up', delay: 0 },
     { selector: '.function-content', animation: 'fade-in', delay: 200 },
     { selector: '.newsletter-container', animation: 'slide-up', delay: 0 },

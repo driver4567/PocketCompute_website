@@ -234,7 +234,7 @@ const cookiePolicyContent = `
     You can also set or amend your web browser controls to accept or refuse cookies. If you choose to reject cookies, you may still use our website, but your access to some functionality and areas of our website may be restricted. As the means by which you can refuse cookies through your web browser controls vary from browser to browser, you should visit your browser's help menu for more information.
   </p>
   <p>
-    In addition, most advertising networks offer you a way to opt out of targeted advertising. If you would like to find out more information, please visit <a href="http://www.aboutads.info/choices/" target="_blank">http://www.aboutads.info/choices/</a> or <a href="http://www.youronlinechoices.com" target="_blank">http://www.youronlinechoices.com</a>.
+    In addition, most advertising networks offer you a way to opt out of targeted advertising. If you would like to find out more information, please visit <a href="https://www.aboutads.info/choices/" target="_blank">https://www.aboutads.info/choices/</a> or <a href="https://www.youronlinechoices.com" target="_blank">https://www.youronlinechoices.com</a>.
   </p>
   
   <h2>6. How Often Will We Update This Cookie Policy</h2>
@@ -329,6 +329,8 @@ function createModalStructure() {
 
 // Initialize modal functionality
 document.addEventListener('DOMContentLoaded', function() {
+  //console.log("DOMContentLoaded - modals.js");
+  
   createModalTemplates();
   createModalStructure();
 });

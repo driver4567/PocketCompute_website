@@ -2,6 +2,16 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize Handlebars and translations
   window.i18n.initHandlebars();
   window.i18n.initLanguage();
+
+  //To set initial transations on page load, if language is different to default
+  // Initialize translation elements (data-translation, data-translation-placeholder, data-translation-alt)
+  //initializeTranslations();
+  // Set up event listeners for language changes and buttons
+  initializeEvents();
+  // Update translations when language changes
+  //document.addEventListener('language-changed', initializeTranslations);
+  //document.addEventListener('language-changed', window.i18n.renderTemplates);  //<-- I did have this in place but it was causing renderTemplates to run a second time
+
   
   // Initialize animations
   initAnimations();
@@ -17,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initVideoModal();
 });
 
+
 // Animation functions
 function initAnimations() {
   // Define elements to animate
@@ -25,7 +36,7 @@ function initAnimations() {
     { selector: '.hero-image-container', animation: 'slide-right', delay: 0 },
     { selector: '.hero-discount', animation: 'fade-in', delay: 300 },
     { selector: '.section-header', animation: 'slide-up', delay: 0 },
-    { selector: '.feature-card', animation: 'slide-up', delay: 100, staggered: true },
+    //{ selector: '.feature-card', animation: 'slide-up', delay: 100, staggered: true },
     { selector: '.function-tabs', animation: 'slide-up', delay: 0 },
     { selector: '.function-content', animation: 'fade-in', delay: 200 },
     { selector: '.newsletter-container', animation: 'slide-up', delay: 0 },

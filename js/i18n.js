@@ -1,10 +1,28 @@
+// For an internationalised Flag
+// if they have a preferred english language, which one do they use, otherwise I could chck if there location preferrence closer to US or UK
+const getPreferedEnglish = () => {
+  const browserLang = navigator.language || navigator.userLanguage;
+
+  if (browserLang.toLowerCase() == 'en-us') { 
+    return 'US'; 
+  } else {
+    return 'GB';  //en-GB, en-CA, en-AU, en-IE, en-ZA, en-NZ, en
+  }
+
+  // if there base language is not english and so they don't have a visible preference go on location
+  // navigator.geolocation - I was thinking of using geolocation, but this requires user concent, other wise I could lookup based on their IP, but instead I'll keep it simple
+  // If US, US flag, otherwise UK
+};
+
 // Language Setup
 const languages = [
-  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'en', name: 'English', flag: (getPreferedEnglish() == 'US') ? "🇺🇸" : "🇬🇧" },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
   { code: 'ja', name: '日本語', flag: '🇯🇵' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' }
+  { code: 'cn', name: '繁體中文', flag: '🇨🇳' }
 ];
 
 // Translations
@@ -14,7 +32,8 @@ const translations = {
       title: "PocketCompute - A multi-functional mini computer"
     },
     navbar: {
-      features: "Features",
+      features: "Specifications", //"Features",
+      instagram: "Images",
       keyFunctions: "Key Functions",
       about: "About",
       faq: "FAQ",
@@ -84,21 +103,22 @@ const translations = {
           nfc: "Enhanced NFC capabilities",
           secure: "Secure payment processing",
           pos: "Perform POS functionality",
-          readWrite: "Read and Write NFC tokens",
-          accessControl: "RFID / NFC access control"
+          readWrite: "Read and Write NFC &amp; RFID tokens",
+          accessControl: "Token &amp; Swipe card access control",
+          offlinePayments: "Offline payment capability*"
         },
         ImageSubText: "Use PocketCompute to receive Payments"
       },
       expansion: {
         title: "Universal Handheld Control hub",
-        description: "As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCB’s or micro-controllers, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers who wish to extend PocketCompute’s functionality to any number of applications with no bounds.",
+        description: "As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCBs, microcontrollers or other gadgetry, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers who wish to extend PocketCompute’s functionality to any number of applications with no bounds.",
         features: {
           usb: "Internal USB expansion port",
           modules: "IoT applications",
           sdk: "Open-source printable 3D models of back and front removable Panels to allow for custom designs &amp; configurations",
           controlHub: "Smart control hub"
         },
-        ImageSubText: "Remove the backcover with two screws and extend PocketCompute’s functionality with additional Microcontrollers or Electionics. Pictured here a red Arduino Nano clone ready to be connected to PocketCompute's internal USB and a Raspberry Pi Pico to the side."
+        ImageSubText: "Remove the backcover with two screws and extend PocketCompute’s functionality with additional Microcontrollers or Electionics. Pictured here for illustrative purposes a red Arduino Nano clone ready to be connected to PocketCompute's internal USB and a Raspberry Pi Pico to the side."
       }
     },
     videoShowcase: {
@@ -125,11 +145,11 @@ const translations = {
       },
       mission: {
         title: "Our Mission",
-        content: "We're on a mission to empower users and the community with technology that adapts to their unique needs, rather than forcing them to adapt to technology. PocketCompute is designed to evolve with you, offering endless possibilities for custom expansion and computing solutions."
+        content: "We're on a mission to empower users and the community with technology that adapts to their unique needs and enables the change makers of tomorrow. PocketCompute is designed to evolve with you, offering endless possibilities for custom expansion and computing solutions."
       },
       team: {
         title: "Our Team",
-        content: "PocketCompute is made up of a small passionate team, that brings together makers and creators just like you, with expertise from consumer electronics, software development, and hardware engineering. United by a love <i class='fa-regular fa-heart'></i> and passion for innovation, we're committed to pushing the boundaries of what's possible in technology."
+        content: "PocketCompute is made up of a small passionate team, that brings together makers and creators just like you, with expertise from consumer electronics, software development, and hardware engineering. United by a love <i class='fa-regular fa-heart'></i> and passion for innovation, we're committed to helping our users push the boundaries of what's possible through technology."
       }
     },
     faq: {
@@ -137,7 +157,7 @@ const translations = {
       subtitle: "Find answers to common questions about PocketCompute.",
       availability: {
         question: "When will PocketCompute be available?",
-        answer: "PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q2 2025. The first devices are expected to ship to Kickstarter backers in Q4 2025 to Q1 2026, with general availability planned for Q1 2026."
+        answer: "PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q3 2025. The first devices are expected to ship to Kickstarter backers in Q1 2026 to Q2 2026, with general availability planned for Q2 2026."
       },
       os: {
         question: "What operating system does PocketCompute run?",
@@ -211,7 +231,7 @@ const translations = {
     },
     cta: {
       title: "Ready to Experience the Future?",
-      subtitle: "Pre-order your <span class='asap-word'>PocketCompute</span> device today and be the first to experience the future of mini computing.",
+      subtitle: "Pre-order your <span class='asap-word'>PocketCompute</span> device today and be the first to experience the future of mini-computing.",
       button: "Pre-order Now"
     },
     footer: {
@@ -1149,9 +1169,9 @@ const translations = {
 };
 
 // i18n setup
-let currentLanguage = 'en';
+let currentLanguage = 'en';  //en is default
 
-// Initialize Handlebars
+// Initialise Handlebars
 const initHandlebars = () => {
   // Register Handlebars helpers
   Handlebars.registerHelper('t', function(key) {
@@ -1188,22 +1208,35 @@ const getTranslation = (key) => {
 
 // Set language
 const setLanguage = (langCode) => {
-  if (translations[langCode]) {
-    currentLanguage = langCode;
-    
-    // Update document title
-    document.title = getTranslation('meta.title');
-    
-    // Call the render function to update all templates
-    renderTemplates();
-    
-    // Update the language selector
-    const languageToggleText = document.querySelector('.language-toggle-text');
-    const selectedLang = languages.find(lang => lang.code === currentLanguage);
-    if (languageToggleText && selectedLang) {
-      languageToggleText.textContent = selectedLang.name;
+
+  if (translations[langCode]) {  // providing the language is in the available translations..
+
+    // only update the language if it's different to the defualt - so if it's already set to english, there is no need to update it
+    //console.log(langCode);
+    //console.log(currentLanguage);
+    if (langCode != currentLanguage) {
+
+      currentLanguage = langCode;
+      
+      // Update document html tag, lang attribute
+      document.documentElement.lang = langCode; // Update <html lang>
+      // Update document title
+      document.title = getTranslation('meta.title');
+      
+      // Call the render function to update all templates
+      renderTemplates();
+      
+      // Update the language selector
+      const languageToggleText = document.querySelector('.language-toggle-text');
+      const selectedLang = languages.find(lang => lang.code === currentLanguage);
+      if (languageToggleText && selectedLang) {
+        languageToggleText.textContent = selectedLang.name;
+      }
+    } else {
+      // Render just the modals
+      renderJustModalTemplates();
     }
-    
+
     // Store language preference in localStorage
     localStorage.setItem('preferred_language', langCode);
     
@@ -1214,7 +1247,9 @@ const setLanguage = (langCode) => {
 
 // Get browser language
 const getBrowserLanguage = () => {
+
   const browserLang = navigator.language || navigator.userLanguage;
+  //console.log("getBrowserLang " + browserLang);
   
   // Convert to base language code (e.g., 'en-US' -> 'en')
   const baseLang = browserLang.split('-')[0];
@@ -1232,10 +1267,12 @@ const getBrowserLanguage = () => {
 
 // Initialize language
 const initLanguage = () => {
+
   // Check if user has a stored preference
   const storedLang = localStorage.getItem('preferred_language');
-  
-  if (storedLang && translations[storedLang]) {
+
+  if (storedLang && translations[storedLang]) {   //if storedLang != null, and is available in the translations
+    //console.log("initLanguage - storedLang " + storedLang);
     setLanguage(storedLang);
   } else {
     // Get browser language
@@ -1244,8 +1281,9 @@ const initLanguage = () => {
   }
 };
 
-// Render templates
+// Render templates (this includes rendering the modals)
 const renderTemplates = () => {
+  //console.log("renderTemplates");
   // Get all elements with data-template attribute
   const templateElements = document.querySelectorAll('[data-template]');
   
@@ -1254,6 +1292,24 @@ const renderTemplates = () => {
     const templateSource = document.getElementById(templateId).innerHTML;
     const template = Handlebars.compile(templateSource);
     element.innerHTML = template({});
+  });
+
+  initializeTranslations(); // in translations.js
+};
+
+// Render Just the modals
+const renderJustModalTemplates = () => {
+  //console.log("renderJustModalTemplates");
+  document.querySelectorAll('.modal').forEach(modal => {
+    const element = modal.querySelector('[data-template]');
+    if (element) {
+      const templateId = element.getAttribute('data-template');
+      const templateSource = document.getElementById(templateId)?.innerHTML;
+      if (templateSource) {
+        const template = Handlebars.compile(templateSource);
+        element.innerHTML = template({});
+      }
+    }
   });
 };
 
@@ -1267,3 +1323,6 @@ window.i18n = {
   initLanguage,
   renderTemplates
 };
+
+//Set english flag emogi to language dropdown
+document.getElementById("englishFlag").innerHTML = (getPreferedEnglish() == 'US') ? "🇺🇸" : "🇬🇧";

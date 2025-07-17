@@ -1,11 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize translation elements after i18n is loaded
-  initializeTranslations();
-  
-  // Update translations when language changes
-  document.addEventListener('language-changed', initializeTranslations);
-});
-
 // Update all elements with translation attributes
 function initializeTranslations() {
   // Update text content for elements with data-translation attribute
@@ -60,11 +52,6 @@ function updateAltTranslations() {
   });
 }
 
-// Update document title
-function updateDocumentTitle() {
-  document.title = window.i18n.getTranslation('meta.title');
-}
-
 // Custom event for language changes
 function createLanguageChangedEvent() {
   // Create a custom event for when language changes
@@ -79,9 +66,6 @@ function createLanguageChangedEvent() {
     if (result) {
       // Trigger the custom event
       document.dispatchEvent(languageChangedEvent);
-      
-      // Update document title
-      updateDocumentTitle();
     }
     
     return result;
@@ -104,8 +88,3 @@ function initializeEvents() {
     });
   });
 }
-
-// Add initialization to DOM content loaded
-document.addEventListener('DOMContentLoaded', function() {
-  initializeEvents();
-});

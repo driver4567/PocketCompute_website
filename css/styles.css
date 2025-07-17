@@ -104,6 +104,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* For video scrubber */
+/* Canvas to display video, fixed and centered in viewport */
+/*
+video_canvas {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+  display: none;
+}
+*/
+/* Video element, hidden but used for frame data and fallback */
+video_scrub {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+  display: none; /* Hidden, but fallback image may show */
+}
+
 a {
   color: var(--primary);
   text-decoration: none;
@@ -181,14 +205,6 @@ p {
   padding: 0 1rem;
 }
 
-/*
-@media (min-width: 380px) {
-  .md-col-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
-}*/
-
 @media (min-width: 768px) {
   .md-col-6 {
     flex: 0 0 50%;
@@ -200,6 +216,32 @@ p {
     max-width: 66.666666%;
   }*/
 }
+
+@media (max-width: 768px) {
+  .md-col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* Force 1 column at the smallest width */
+@media (max-width: 340px) {
+  .md-col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .lg-col-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+/* 
+@media (min-width: 380px) {
+  .md-col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+} */
 
 @media (min-width: 992px) {
   .lg-col-4 {
@@ -342,7 +384,7 @@ p {
   align-items: center;
   gap: 0.5rem;
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 1rem;
   border: none;
   background: none;
   color: var(--neutral-800);
@@ -358,12 +400,14 @@ p {
 }
 
 .language-option .flag {
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  /* font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; */
+  font-family: "Arial"; /* since when I test for the flag, I test in Arial */
   /* font-size: 1.2rem; */
 }
 
 .flag {
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  /* font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; */
+  font-family: "Arial";  /* since when I test for the flag, I test in Arial */
   display: inline-block; /* Ensure proper spacing */
   margin-right: 0.5rem; /* Add spacing between flag and text */
 }
@@ -472,6 +516,9 @@ p {
   padding: 1rem 0;
 }
 
+
+
+
 .hero-title {
   font-size: 3.5rem;
   font-weight: 700;
@@ -489,7 +536,7 @@ p {
   width: fit-content;
 }
 
-/* Allow the PocketCompute text in the hero to fade in to apperance, more so after the font has loaded */
+/* Allow the 'PocketCompute' part of the title text in the hero to fade in to apperance, more so after the font has loaded */
 .hero-title div {
   font-size: 3.5rem;
   font-weight: 700;
@@ -507,6 +554,16 @@ p {
   white-space: nowrap;
   font-family:'Asap', sans-serif; 
   font-style: italic !important;
+}
+
+/* To fix a responsive jump with the video in place */
+@media (max-width: 874px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .hero-title div {
+    font-size: 2.5rem;
+  }
 }
 
 .hero-subtitle {
@@ -527,9 +584,11 @@ p {
   position: relative;
   /* height: 578px; */ /* was 450px; */
   /* width: 478px; */
+  /* - removing boarder around hero image/video
   border-radius: var(--rounded-xl);
-  overflow: hidden;
   box-shadow: var(--shadow-xl);
+  */
+  overflow: hidden;
   /*transform: rotate(2deg);*/
   transition: transform 0.5s ease;
   /*background: linear-gradient(135deg, #4f46e5, #3730a3);*/
@@ -537,6 +596,10 @@ p {
   margin-right: auto;
   /* min-width: 260px; */
   min-width: 0px;
+
+  /* to help centre the video_scrub */
+  justify-content: center;
+  display: flex;
 }
 
 .hero-image-container:hover {
@@ -544,8 +607,12 @@ p {
 }
 
 .hero-image {
-  width: 100%;
-  height: 100%;
+  /* since I set the video height to *0.8 in videoplay_p2p.js, I match it here */
+  /*width: 100%;*/
+  max-width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  height: 80%;
   object-fit: cover;
   transition: transform 0.5s ease;
   display: block;
@@ -1381,7 +1448,7 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='https://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   opacity: 0.15;
 }
 
@@ -1923,7 +1990,7 @@ p {
   }
   
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.5rem;  /* was 2.5 */
     /* background: linear-gradient(90deg, var(--neutral-800) 0%, var(--primary) 100%); */
     -webkit-background-clip: text;
     background-clip: text;
@@ -2055,7 +2122,9 @@ p {
   .modal {
     padding: 1.5rem;
   }
+}
 
+@media (max-width: 630px) {
   /* Make the language selector drop up (not down, so it doesn't run off the screen), when the column it is in is wrapped to the next line */
   .col_language .language-selector {
     position: relative;

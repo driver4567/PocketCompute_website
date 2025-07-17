@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="google" content="notranslate">  -->  <!--This turns off the browers translate, handy for debug -->
   <title>PocketCompute - A multi-functional mini computer</title>
 
   <!-- Preload Google Font -->
@@ -51,17 +52,18 @@
    -->
   <style type="text/css">
     @font-face {
-      font-family: 'Asap';
+      font-family: 'Asap', sans-serif;
       font-weight: 700;
       font-style: italic;
-      src: url(https://fonts.gstatic.com/l/font?kit=KFOMCniXp96ayz4E7kSn66aGLdTylUAMQXC89YmC2DPNWuYjammWmgWdxj9DtAJZow8C&skey=ed90f3b9cc892982&v=v30) format('woff2');
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOMCniXp96ayz4E7kSn66aGLdTylUAMQXC89YmC2DPNWuYjammWmgWdxj9DtAJZow8C&skey=ed90f3b9cc892982&v=v30) format('woff2'),
+           url('font/font_Asap_Italic_700.woff2') format('woff2'); /* Local fallback */
     }
   </style>
 
   <!-- Inline SVG Logo -->
   <script>
     const logoSVG = `
-      <svg viewBox="0 0 119 23" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 119 23" xmlns="https://www.w3.org/2000/svg">
 
           <defs>
              <bx:grid x="0" y="0" width="115.817" height="23.288"></bx:grid>
@@ -170,13 +172,17 @@
     // Check if the flag unicode renders correctly in the clients browser, if not replace with SVG image from flag-icons.min.css
     document.addEventListener("DOMContentLoaded", () => {
 
+        let enFlag = getPreferedEnglish();
+
         // Map of language codes to flag emojis and image paths
         const flagMap = {
-            gb: { emoji: "🇬🇧", image: "flag fi fi-gb", alt: "UK Flag" },
+            gb: { emoji: (enFlag == 'US') ? "🇺🇸" : "🇬🇧", image: (enFlag == 'US') ? "flag fi fi-us" : "flag fi fi-gb", alt: "English Flag" },
             de: { emoji: "🇩🇪", image: "flag fi fi-de", alt: "German Flag" },
-            fr: { emoji: "🇫🇷", image: "flag fi fi-fr", alt: "French Flag" },
-            ja: { emoji: "🇯🇵", image: "flag fi fi-jp", alt: "Japanese Flag" },
             es: { emoji: "🇪🇸", image: "flag fi fi-es", alt: "Spanish Flag" },
+            fr: { emoji: "🇫🇷", image: "flag fi fi-fr", alt: "French Flag" },
+            it: { emoji: "🇮🇹", image: "flag fi fi-it", alt: "Italian Flag" },
+            ja: { emoji: "🇯🇵", image: "flag fi fi-jp", alt: "Japanese Flag" },
+            cn: { emoji: "🇨🇳", image: "flag fi fi-cn", alt: "Chinese Flag" }
         };
     
         // Function to detect if flag emoji renders correctly
@@ -229,6 +235,7 @@
 
         // Check if flag support is already cached in session var
         let canRenderFlags = localStorage.getItem("canRenderFlags");
+        //console.log("Flags " + canRenderFlags);
 
         if (canRenderFlags === null) {
             // Test only one flag emoji (🇬🇧 for English)
@@ -273,7 +280,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="manifest" href="favicon/site.webmanifest"> <!-- removed while Debug, when running locally -->
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -296,7 +303,7 @@
           768: {
             perPage: 2,
           },
-          400: {
+          480: {
             perPage: 1,
           },
         },
@@ -305,6 +312,7 @@
         gap: '1em',
         focus    : 'center',
         lazyLoad: 'nearby',
+        preloadpreloadPages: 2,
         //updateOnMove : true,
       } );
       splide.mount();
@@ -327,11 +335,14 @@
       <nav class="nav">
         <ul class="nav-list">
           <li class="nav-item">
-            <a href="#features" class="nav-link" data-translation="navbar.features">Features</a>
-          </li>
-          <li class="nav-item">
             <a href="#functions" class="nav-link" data-translation="navbar.keyFunctions">Key Functions</a>
           </li>
+          <li class="nav-item">
+            <a href="#instagram" class="nav-link" data-translation="navbar.instagram">Images</a>
+          </li>
+          <!--<li class="nav-item">
+            <a href="#features" class="nav-link" data-translation="navbar.features">Specifications</a>
+          </li>-->
           <li class="nav-item">
             <a href="#about" class="nav-link" data-translation="navbar.about">About</a>
           </li>
@@ -348,8 +359,8 @@
   <!-- Hero Section -->
   <section id="hero" class="hero">
     <div class="container">
-      <div class="row">
-        <div class="col lg-col-5">
+      <div class="row" id="hero-row">
+        <div class="col lg-col-5" id="hero_left_col">
           <div class="hero-content opacity-0">
             <h1 class="hero-title" data-translation="hero.title">introducing... <br><div style="font-family:'Asap', sans-serif; font-weight: 700 !important; font-style: italic !important;">&nbsp PocketCompute</div></h1>
             <p class="hero-subtitle" data-translation="hero.subtitle">the World's First <b>payment</b> ready <i><b>mini computer</b></i> for <b>Makers</b> and <b>Creators</b></p>
@@ -366,14 +377,42 @@
           </div>
         </div>
         
-        <div class="col lg-col-5">
+        <div class="col lg-col-5" id="hero_right_col">
           <div class="hero-image-container opacity-0">
-            <img src="images/hero_pocketCompute.jpg" alt="PocketCompute" class="hero-image" data-translation-alt="hero.deviceImageAlt">
+
+            <!-- Image element - shown initially -->
+            <img id="fallbackImage" src="video/screen1.jpg" alt="PocketCompute" class="hero-image" data-translation-alt="hero.deviceImageAlt">
+      
+            <!-- Video element - hidden initially, until the video loads -->
+            <video id="video_scrub" preload="auto" muted alt="PocketCompute" data-translation-alt="hero.deviceImageAlt"
+                    class="hero-image hidden"> <!--  preload="metadata" -->
+
+                <!-- the logic of the order, vp9 is best quality, but mp4 is half the size  -->
+                <!-- loaded dynamicly instead, since Chrome on Android and Firefox on Desktop, don't seek well for mp4 (ie. don't scroll smoothly). 
+                     So this is set in swapImageToVideo() in videoplay_p2p.js
+                <source src="video/animation_every16keyframes_h264.mp4" type="video/mp4">
+                <source src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
+                <source src="video/animate1_vp8.webm" type="video/webm; codecs=vp8">
+                -->
+                <source id="src-mp4" src="video/animation_every16keyframes_h264.mp4" type="video/mp4">
+                <source id="src-vp9" src="video/animate1_vp9.webm" type="video/webm; codecs=vp9">
+                <source id="src-vp8" src="video/animate1_vp8.webm" type="video/webm; codecs=vp8">
+            </video>
+
+            <!-- Canvas to render video frames -->
+            <!-- <canvas id="video_canvas"></canvas> -->
+
+            <!-- Optional discount badge -->
             <!--<div class="hero-discount opacity-0" data-translation="hero.discount">Pre-order now and save 10%</div>-->
           </div>
         </div>
       </div>
       
+      <!-- For debug notes of video -->
+      <!-- <p class="mockConsole">
+        ...
+      </p> -->
+
       <div class="social-links">
         <a href="https://instagram.com/PocketCompute" class="social-link" aria-label="Instagram">
           <i class="fab fa-instagram"></i>
@@ -387,80 +426,6 @@
         <a href="https://www.youtube.com/@PocketCompute" class="social-link" aria-label="YouTube">
           <i class="fab fa-youtube"></i>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section id="features" class="features">
-    <div class="container">
-      <div class="section-header opacity-0">
-        <h2 class="section-title" data-translation="features.title">Advanced Features</h2>
-        <p class="section-subtitle" data-translation="features.subtitle">Discover what makes PocketCompute stand out from conventional smartphones and smart devices.</p>
-      </div>
-      
-      <div class="row">
-        <div class="col md-col-6 lg-col-4">
-          <div class="feature-card opacity-0">
-            <div class="feature-icon">
-              <i class="fas fa-mobile-alt"></i>
-            </div>
-            <h3 class="feature-title" data-translation="features.display.title">High-Resolution Display</h3>
-            <p class="feature-description" data-translation="features.display.description">Vibrant 6.5-inch High Definition Plus display with 5 points capacitive touchscreen, for smooth scrolling and stunning visuals.</p>
-          </div>
-        </div>
-        
-        <div class="col md-col-6 lg-col-4">
-          <div class="feature-card opacity-0">
-            <div class="feature-icon">
-              <i class="fas fa-microchip"></i>
-            </div>
-            <h3 class="feature-title" data-translation="features.processor.title">Advanced Processor</h3>
-            <p class="feature-description" data-translation="features.processor.description">A powerful 2.3Ghz octa-core 64-bit MediaTek MT6765 processor for lightning-fast performance.</p>
-          </div>
-        </div>
-        
-        <div class="col md-col-6 lg-col-4">
-          <div class="feature-card opacity-0">
-            <div class="feature-icon">
-              <i class="fas fa-camera"></i>
-            </div>
-            <h3 class="feature-title" data-translation="features.camera.title">Pro Camera System</h3>
-            <p class="feature-description" data-translation="features.camera.description">Triple-camera rear setup with 48MP sensor Camera, 5MP wide Camera, and 2MP Macro Camera for professional-grade photography. As well as a 24MP front facing Camera.</p>
-          </div>
-        </div>
-        
-        
-        <div class="col md-col-6 lg-col-4">
-          <div class="feature-card opacity-0">
-            <div class="feature-icon">
-              <i class="fas fa-hard-drive"></i>
-            </div>
-            <h3 class="feature-title" data-translation="features.memory.title">Memory and Storage</h3>
-            <p class="feature-description" data-translation="features.memory.description">4GB of RAM paired with 128GB of onboard storage and a TF card slot to expand even further.</p>
-          </div>
-        </div>
-        
-        <div class="col md-col-6 lg-col-4">
-          <div class="feature-card opacity-0">
-            <div class="feature-icon">
-              <i class="fas fa-bolt"></i>
-            </div>
-            <h3 class="feature-title" data-translation="features.charging.title">Fast Charging</h3>
-            <p class="feature-description" data-translation="features.charging.description">Power up fast with USB-C and a massive 4650mAh battery.</p>
-          </div>
-        </div>
-        
-        <div class="col md-col-6 lg-col-4">
-          <div class="feature-card opacity-0">
-            <div class="feature-icon">
-              <i class="fas fa-wifi"></i>
-            </div>
-            <h3 class="feature-title" data-translation="features.connectivity.title">Connectivity &amp; Sensors</h3>
-            <p class="feature-description" data-translation="features.connectivity.description">Dual SIM, 4G, Wi-Fi 802.11 (ac)/b/g/n, Bluetooth 5.0 — Packed with smart sensors and GPS, Gravity, Ambient Light, Proximity, Accelerometer.</p>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -529,15 +494,17 @@
               <span class="function-feature-icon"><i class="fas fa-cash-register"></i></span>
               <span data-translation="functions.payment.features.pos">Perform POS functionality</span>
             </li>
-            <!--
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fab fa-nfc-directional"></i></span>
-              <span data-translation="functions.payment.features.readWrite">Read and Write NFC tokens</span>
+              <span data-translation="functions.payment.features.readWrite">Read and Write NFC &amp; RFID tokens</span>
             </li>
-            -->
             <li class="function-feature">
-              <span class="function-feature-icon"><i class="fab fa-nfc-directional"></i></span>
-              <span data-translation="functions.payment.features.accessControl">RFID / NFC access control</span>
+              <span class="function-feature-icon"><i class="fab fa-nfc-symbol"></i></span>
+              <span data-translation="functions.payment.features.accessControl">Token &amp; Swipe card access control</span>
+            </li>
+            <li class="function-feature">
+              <span class="function-feature-icon"><i class="fa-solid fa-phone-slash"></i></span>
+              <span data-translation="functions.payment.features.offlinePayments">Offline payment capability*</span>
             </li>
           </ul>
         </div>
@@ -555,7 +522,7 @@
       <div class="function-item">
         <div class="function-content">
           <h3 class="function-title" data-translation="functions.expansion.title">Universal Handheld Control hub</h3>
-          <p class="function-description" data-translation="functions.expansion.description">As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCB's or micro-controllers, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers who wish to extend PocketCompute’s functionality to any number of applications with no bounds.</p>
+          <p class="function-description" data-translation="functions.expansion.description">As well as being able to connect to multiple hardware devices, PocketCompute also comes with an internal USB 2.0 port under the back cover. With extra room to connect custom PCBs, microcontrollers or other gadgetry, including mounting screw holes for an <i>Arduino Nano</i>, <i>ESP32</i> or a <i>Raspberry Pi Pico</i>, perfect for the makers who wish to extend PocketCompute’s functionality to any number of applications with no bounds.</p>
           <ul class="function-features-list">
             <li class="function-feature">
               <span class="function-feature-icon"><i class="fas fa-plus"></i></span>
@@ -579,7 +546,7 @@
           <div class="function-image-container">
             <img src="images/Adding_Microcontrollers.jpg" alt="Microcontroller Expansion" class="function-image">
             <div class="function-image-overlay">
-              <p class="function-image-subtext" data-translation="functions.expansion.ImageSubText">Remove the backcover with two screws and extend PocketCompute's functionality with additional Microcontrollers or Electionics. Pictured here a red Arduino Nano clone ready to be connected to PocketCompute's internal USB and a Raspberry Pi Pico to the side.</p>
+              <p class="function-image-subtext" data-translation="functions.expansion.ImageSubText">Remove the backcover with two screws and extend PocketCompute's functionality with additional Microcontrollers or Electionics. Pictured here for illustrative purposes a red Arduino Nano clone ready to be connected to PocketCompute's internal USB and a Raspberry Pi Pico to the side.</p>
             </div>
           </div>
         </div>
@@ -688,6 +655,80 @@
     </div>
   </section>
 
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-header opacity-0">
+        <h2 class="section-title" data-translation="features.title">Advanced Features</h2>
+        <p class="section-subtitle" data-translation="features.subtitle">Discover what makes PocketCompute stand out from conventional smartphones and smart devices.</p>
+      </div>
+      
+      <div class="row">
+        <div class="col md-col-6 lg-col-4">
+          <div class="feature-card opacity-0">
+            <div class="feature-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3 class="feature-title" data-translation="features.display.title">High-Resolution Display</h3>
+            <p class="feature-description" data-translation="features.display.description">Vibrant 6.5-inch High Definition Plus display with 5 points capacitive touchscreen, for smooth scrolling and stunning visuals.</p>
+          </div>
+        </div>
+        
+        <div class="col md-col-6 lg-col-4">
+          <div class="feature-card opacity-0">
+            <div class="feature-icon">
+              <i class="fas fa-microchip"></i>
+            </div>
+            <h3 class="feature-title" data-translation="features.processor.title">Advanced Processor</h3>
+            <p class="feature-description" data-translation="features.processor.description">A powerful 2.3Ghz octa-core 64-bit MediaTek MT6765 processor for lightning-fast performance.</p>
+          </div>
+        </div>
+        
+        <div class="col md-col-6 lg-col-4">
+          <div class="feature-card opacity-0">
+            <div class="feature-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+            <h3 class="feature-title" data-translation="features.camera.title">Pro Camera System</h3>
+            <p class="feature-description" data-translation="features.camera.description">Triple-camera rear setup with 48MP sensor Camera, 5MP wide Camera, and 2MP Macro Camera for professional-grade photography. As well as a 24MP front facing Camera.</p>
+          </div>
+        </div>
+        
+        
+        <div class="col md-col-6 lg-col-4">
+          <div class="feature-card opacity-0">
+            <div class="feature-icon">
+              <i class="fas fa-hard-drive"></i>
+            </div>
+            <h3 class="feature-title" data-translation="features.memory.title">Memory and Storage</h3>
+            <p class="feature-description" data-translation="features.memory.description">4GB of RAM paired with 128GB of onboard storage and a TF card slot to expand even further.</p>
+          </div>
+        </div>
+        
+        <div class="col md-col-6 lg-col-4">
+          <div class="feature-card opacity-0">
+            <div class="feature-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="feature-title" data-translation="features.charging.title">Fast Charging</h3>
+            <p class="feature-description" data-translation="features.charging.description">Power up fast with USB-C and a massive 4650mAh battery.</p>
+          </div>
+        </div>
+        
+        <div class="col md-col-6 lg-col-4">
+          <div class="feature-card opacity-0">
+            <div class="feature-icon">
+              <i class="fas fa-wifi"></i>
+            </div>
+            <h3 class="feature-title" data-translation="features.connectivity.title">Connectivity &amp; Sensors</h3>
+            <p class="feature-description" data-translation="features.connectivity.description">Dual SIM, 4G, Wi-Fi 802.11 (ac)/b/g/n, Bluetooth 5.0 — Packed with smart sensors and GPS, Gravity, Ambient Light, Proximity, Accelerometer.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- About Section -->
   <section id="about" class="about">
     <div class="container">
@@ -711,12 +752,12 @@
           
           <div class="about-mission">
             <h3 class="about-mission-title" data-translation="about.mission.title">Our Mission</h3>
-            <p class="about-mission-content" data-translation="about.mission.content">We're on a mission to empower users and the community with technology that adapts to their unique needs, rather than forcing them to adapt to technology. PocketCompute is designed to evolve with you, offering endless possibilities for custom expansion and computing solutions.</p>
+            <p class="about-mission-content" data-translation="about.mission.content">We're on a mission to empower users and the community with technology that adapts to their unique needs and enables the change makers of tomorrow. PocketCompute is designed to evolve with you, offering endless possibilities for custom expansion and computing solutions.</p>
           </div>
           
           <div class="about-team">
             <h3 class="about-team-title" data-translation="about.team.title">Our Team</h3>
-            <p class="about-team-content" data-translation="about.team.content">PocketCompute is made up of a small passionate team, that brings together makers and creators just like you, with expertise from consumer electronics, software development, and hardware engineering. United by a love <i class="fa-regular fa-heart"></i> and passion for innovation, we're committed to pushing the boundaries of what's possible in technology.</p>
+            <p class="about-team-content" data-translation="about.team.content">PocketCompute is made up of a small passionate team, that brings together makers and creators just like you, with expertise from consumer electronics, software development, and hardware engineering. United by a love <i class="fa-regular fa-heart"></i> and passion for innovation, we're committed to helping our users push the boundaries of what's possible through technology.</p>
           </div>
         </div>
       </div>
@@ -739,7 +780,7 @@
               <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content" id="faq-1">
-              <p class="accordion-answer" data-translation="faq.availability.answer">PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q2 2025. The first devices are expected to ship to Kickstarter backers in Q4 2025 to Q1 2026, with general availability planned for Q1 2026.</p>
+              <p class="accordion-answer" data-translation="faq.availability.answer">PocketCompute will be available for pre-order through our Kickstarter campaign starting in Q3 2025. The first devices are expected to ship to Kickstarter backers in Q1 2026 to Q2 2026, with general availability planned for Q2 2026.</p>
             </div>
           </div>
           
@@ -864,13 +905,13 @@
         <form id="newsletter-form" class="newsletter-form" autocomplete="on">
           <div class="form-group">
             <label for="name" class="form-label" data-translation="newsletter.form.name">Name</label>
-            <input type="text" id="name" name="name" class="form-input" data-translation-placeholder="newsletter.form.namePlaceholder" placeholder="Enter your name">
+            <input type="text" id="name" name="name" autocomplete="name" class="form-input" data-translation-placeholder="newsletter.form.namePlaceholder" placeholder="Enter your name">
             <div class="form-error" data-error="name"></div>
           </div>
           
           <div class="form-group">
             <label for="email" class="form-label" data-translation="newsletter.form.email">Email</label>
-            <input type="email" id="email" name="email" class="form-input" data-translation-placeholder="newsletter.form.emailPlaceholder" placeholder="Enter your email">
+            <input type="email" id="email" name="email" autocomplete="email" class="form-input" data-translation-placeholder="newsletter.form.emailPlaceholder" placeholder="Enter your email">
             <div class="form-error" data-error="email"></div>
           </div>
           
@@ -890,7 +931,7 @@
   <section id="kickstarter" class="cta">
     <div class="container opacity-0">
       <h2 class="cta-title" data-translation="cta.title">Ready to Experience the Future?</h2>
-      <p class="cta-subtitle" data-translation="cta.subtitle">Pre-order your <span class="asap-word">PocketCompute</span> device today and be the first to experience the future of mini computing.</p>
+      <p class="cta-subtitle" data-translation="cta.subtitle">Pre-order your <span class="asap-word">PocketCompute</span> device today and be the first to experience the future of mini-computing.</p>
       <a href="#" class="btn btn-white btn-lg btn-with-icon">
         <span data-translation="cta.button">Pre-order Now</span>
         <i class="fas fa-chevron-right btn-icon"></i>
@@ -959,19 +1000,25 @@
             
             <div class="language-dropdown">
               <button class="language-option" data-lang="en">
-                <span class="flag" data-flag="gb" data-lang="en">🇬🇧</span> English
+                <span class="flag" data-flag="gb" data-lang="en" id="englishFlag">🇬🇧</span> English
               </button>
               <button class="language-option" data-lang="de">
                 <span class="flag" data-flag="de" data-lang="de">🇩🇪</span> Deutsch
               </button>
+              <button class="language-option" data-lang="es">
+                <span class="flag" data-flag="es" data-lang="es">🇪🇸</span> Español
+              </button>
               <button class="language-option" data-lang="fr">
                 <span class="flag" data-flag="fr" data-lang="fr">🇫🇷</span> Français
+              </button>
+              <button class="language-option" data-lang="it">
+                <span class="flag" data-flag="it" data-lang="it">🇮🇹</span> Italiano
               </button>
               <button class="language-option" data-lang="ja">
                 <span class="flag" data-flag="ja" data-lang="ja">🇯🇵</span> 日本語
               </button>
-              <button class="language-option" data-lang="es">
-                <span class="flag" data-flag="es" data-lang="es">🇪🇸</span> Español
+              <button class="language-option" data-lang="cn">
+                <span class="flag" data-flag="cn" data-lang="cn">🇨🇳</span> 繁體中文
               </button>
             </div>
           </div>
@@ -1003,5 +1050,6 @@
   <script src="js/translations.js"></script>
   <script src="js/modals.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/videoplay_p2p.js"></script>
 </body>
 </html>

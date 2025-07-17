@@ -99,13 +99,7 @@ const privacyPolicyContent = `
   
   <h2>11. Contact Information</h2>
   <p>
-    To ask questions or comment about this privacy policy and our privacy practices, contact us at:
-  </p>
-  <p>
-    PocketCompute<br />
-    123 Innovation Drive<br />
-    Tech City, CA 94043<br />
-    contact@pocketcompute.tech
+    To ask questions or comment about this privacy policy and our privacy practices, contact us at: https://facebook.com/PocketCompute
   </p>
 `;
 
@@ -186,13 +180,7 @@ const termsOfServiceContent = `
   
   <h2>13. Contact Us</h2>
   <p>
-    If you have any questions about these Terms, please contact us at:
-  </p>
-  <p>
-    PocketCompute<br />
-    123 Innovation Drive<br />
-    Tech City, CA 94043<br />
-    legal@pocketcompute.tech
+    If you have any questions about these Terms, please contact us at: https://facebook.com/PocketCompute
   </p>
 `;
 
@@ -213,7 +201,7 @@ const cookiePolicyContent = `
   
   <h2>3. Why We Use Cookies</h2>
   <p>
-    We use first-party and third-party cookies for several reasons. Some cookies are required for technical reasons in order for our website to operate, and we refer to these as "essential" or "strictly necessary" cookies. Other cookies also enable us to track and target the interests of our users to enhance the experience on our website. Third parties serve cookies through our website for advertising, analytics, and other purposes.
+    We may use first-party and third-party cookies for several reasons. Some cookies are required for technical reasons in order for our website to operate, and we refer to these as "essential" or "strictly necessary" cookies. Other cookies also enable us to track and target the interests of our users to enhance the experience on our website. Third parties serve cookies through our website for advertising, analytics, and other purposes.
   </p>
   
   <h2>4. Types of Cookies We Use</h2>
@@ -246,7 +234,7 @@ const cookiePolicyContent = `
     You can also set or amend your web browser controls to accept or refuse cookies. If you choose to reject cookies, you may still use our website, but your access to some functionality and areas of our website may be restricted. As the means by which you can refuse cookies through your web browser controls vary from browser to browser, you should visit your browser's help menu for more information.
   </p>
   <p>
-    In addition, most advertising networks offer you a way to opt out of targeted advertising. If you would like to find out more information, please visit <a href="http://www.aboutads.info/choices/" target="_blank">http://www.aboutads.info/choices/</a> or <a href="http://www.youronlinechoices.com" target="_blank">http://www.youronlinechoices.com</a>.
+    In addition, most advertising networks offer you a way to opt out of targeted advertising. If you would like to find out more information, please visit <a href="https://www.aboutads.info/choices/" target="_blank">https://www.aboutads.info/choices/</a> or <a href="https://www.youronlinechoices.com" target="_blank">https://www.youronlinechoices.com</a>.
   </p>
   
   <h2>6. How Often Will We Update This Cookie Policy</h2>
@@ -259,13 +247,7 @@ const cookiePolicyContent = `
   
   <h2>7. Where Can You Get Further Information</h2>
   <p>
-    If you have any questions about our use of cookies or other technologies, please contact us at:
-  </p>
-  <p>
-    PocketCompute<br />
-    123 Innovation Drive<br />
-    Tech City, CA 94043<br />
-    privacy@pocketcompute.tech
+    If you have any questions about our use of cookies or other technologies, please contact us at: https://facebook.com/PocketCompute
   </p>
 `;
 
@@ -347,6 +329,8 @@ function createModalStructure() {
 
 // Initialize modal functionality
 document.addEventListener('DOMContentLoaded', function() {
+  //console.log("DOMContentLoaded - modals.js");
+  
   createModalTemplates();
   createModalStructure();
 });

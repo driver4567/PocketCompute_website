@@ -195,13 +195,13 @@ const translations = {
         question: "What are the specifications of PocketCompute?",
         answer: "PocketCompute features high-end specifications to ensure smooth performance for all use cases:",
         list: {
-          display: "6.5-inch AMOLED display (2400 x 1080, 120Hz)",
-          processor: "Octa-core processor with 5G connectivity",
-          ram: "8GB/12GB RAM options",
-          storage: "128GB/256GB/512GB storage options",
-          battery: "4,500mAh battery with 65W fast charging",
-          camera: "Triple camera system (48MP main + 12MP ultrawide + 8MP telephoto)",
-          ports: "Proprietary expansion port + USB-C + micro-HDMI"
+          display: "6.517-inch AMOLED display (720 x 1600)",
+          processor: "Octa-core processor",
+          ram: "4GB RAM options",
+          storage: "128GB storage options",
+          battery: "4,650mAh battery with fast charging",
+          camera: "Triple camera system (48MP main + 5MP wide camera + 2MP marco camera)",
+          ports: "Expansion ports, 3 x USB, Audio Jack, RJ45"
         }
       }
     },

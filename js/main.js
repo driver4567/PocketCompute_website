@@ -117,6 +117,7 @@ function initMobileMenu() {
       }
     });
     
+    
     // Close mobile menu when clicking on a link
     const navLinks = navMenu.querySelectorAll('a');
     navLinks.forEach(link => {
@@ -130,6 +131,42 @@ function initMobileMenu() {
         }
       });
     });
+    
+    /*
+    // Close mobile menu when clicking or touching on nav-item links
+    const navLinks = navMenu.querySelectorAll('.nav-item');
+    ['click', 'touchend'].forEach(eventType => {
+      navLinks.forEach(link => {
+        link.addEventListener(eventType, (e) => {
+          // Prevent default for touchend to avoid double triggering
+          if (eventType === 'touchend') {
+            e.preventDefault();
+          }
+          
+          // Close the menu
+          navMenu.classList.remove('show');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          
+          // Update icon
+          const icon = menuToggle.querySelector('i');
+          if (icon) {
+            icon.className = 'fas fa-bars';
+            menuToggle.setAttribute('aria-label', window.i18n.getTranslation('navbar.openMenu'));
+          }
+          
+          // Handle smooth scrolling for anchor links
+          const targetId = link.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    });
+    */
   }
 }
 
@@ -219,9 +256,9 @@ function initScrollEffects() {
   // Smooth scrolling for anchor links
   const anchorLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
   anchorLinks.forEach(link => {
-    //link.addEventListener('click', function(e) {
-    ['click', 'touchend'].forEach(eventType => {    //touch added for iOS iphone event
-      link.addEventListener(eventType, function(e) {
+    link.addEventListener('click', function(e) {
+    //['click', 'touchend'].forEach(eventType => {    //touch added for iOS iphone event - didn't make a difference
+      //link.addEventListener(eventType, function(e) {
         e.preventDefault();
         
         const targetId = this.getAttribute('href').substring(1);
@@ -233,7 +270,7 @@ function initScrollEffects() {
             block: 'start'
           });
         }
-      });
+      //});
     });
   });
 }
